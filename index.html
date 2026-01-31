@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Mueen Uddin | Top 2% Scientist</title>
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. THEME VARIABLES --- */
+        :root {
+            --navy: #020c1b;        /* Primary Dark */
+            --blue: #2563eb;        /* Vibrant Accent */
+            --slate: #475569;       /* Text Color */
+            --grey-footer: #1e293b; /* Compact Footer */
+            --light-bg: #f8fafc;
+            
+            --glass: rgba(255, 255, 255, 0.85);
+            --shadow-3d: 0 20px 40px -15px rgba(2, 12, 27, 0.1);
+            --transition: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* --- 2. GLOBAL RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--slate);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 { color: var(--navy); font-weight: 800; letter-spacing: -0.02em; }
+        a { text-decoration: none; color: inherit; transition: all 0.3s var(--transition); }
+        ul { list-style: none; }
+
+        /* --- 3. GLASS NAVBAR --- */
+        nav {
+            position: fixed; top: 0; left: 0; width: 100%; height: 80px;
+            background: rgba(255, 255, 255, 0.7); /* Frosted Glass */
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            z-index: 1000;
+            display: flex; align-items: center;
+        }
+
+        .nav-container {
+            width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--navy); }
+        .logo span { color: var(--blue); }
+
+        .nav-links { display: flex; gap: 2.5rem; }
+        .nav-links a { 
+            font-weight: 600; font-size: 0.95rem; color: var(--navy); position: relative; 
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+            background: var(--blue); transition: 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a:hover { color: var(--blue); }
+
+        .mobile-toggle { display: none; font-size: 1.5rem; color: var(--navy); cursor: pointer; }
+
+        /* --- 4. SCROLL ANIMATIONS --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- 5. HERO SECTION --- */
+        .hero {
+            padding: 180px 0 100px;
+            max-width: 1200px; margin: 0 auto; padding-left: 2rem; padding-right: 2rem;
+            display: grid; grid-template-columns: 1.1fr 1fr; gap: 4rem; align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #eff6ff; color: var(--blue);
+            padding: 8px 16px; border-radius: 50px; font-weight: 700; font-size: 0.85rem;
+            margin-bottom: 1.5rem; box-shadow: 0 4px 10px rgba(37, 99, 235, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 3.8rem; line-height: 1.1; margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--navy) 0%, #475569 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .hero-role { font-size: 1.25rem; font-weight: 500; color: var(--slate); margin-bottom: 2.5rem; }
+
+        .btn {
+            padding: 14px 32px; border-radius: 12px; font-weight: 700;
+            transition: transform 0.2s, box-shadow 0.2s; display: inline-block;
+        }
+        .btn-primary {
+            background: var(--blue); color: white; margin-right: 1rem;
+            box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4);
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 30px -5px rgba(37, 99, 235, 0.5); }
+        
+        .btn-outline { background: white; border: 1px solid #e2e8f0; color: var(--navy); }
+        .btn-outline:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-3px); }
+
+        /* 3D Image */
+        .hero-img-wrapper { position: relative; perspective: 1000px; display: flex; justify-content: center; }
+        .profile-img {
+            width: 100%; max-width: 450px; border-radius: 30px;
+            box-shadow: 20px 20px 60px rgba(0,0,0,0.1);
+            transform: rotateY(-5deg) rotateX(2deg); transition: 0.5s;
+        }
+        .profile-img:hover { transform: rotateY(0) rotateX(0); }
+
+        /* --- 6. STATS (Animated Counters) --- */
+        .stats-banner {
+            background: white; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0;
+            padding: 3rem 0; margin-top: 2rem;
+        }
+        .stats-grid {
+            max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 2rem; text-align: center;
+        }
+        .stat-item h3 { font-size: 2.5rem; color: var(--blue); margin-bottom: 0.2rem; }
+        .stat-item p { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8; }
+
+        /* --- 7. CONTENT SECTIONS --- */
+        .section { padding: 7rem 2rem; max-width: 1200px; margin: 0 auto; }
+        .section-header { margin-bottom: 3rem; }
+        .section-header h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .section-header .line { width: 60px; height: 5px; background: var(--blue); border-radius: 10px; }
+
+        .bio-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 4rem; }
+        .bio-text p { margin-bottom: 1.5rem; text-align: justify; font-size: 1.05rem; }
+
+        .edu-card {
+            background: white; padding: 2rem; border-radius: 20px;
+            box-shadow: var(--shadow-3d); border: 1px solid white;
+        }
+        .edu-item {
+            padding-left: 1.5rem; border-left: 3px solid #eff6ff; margin-bottom: 2rem; position: relative;
+        }
+        .edu-item::before {
+            content: ''; position: absolute; left: -9px; top: 0; width: 15px; height: 15px;
+            background: var(--blue); border: 3px solid white; border-radius: 50%;
+        }
+        .edu-year { color: var(--blue); font-weight: 700; font-size: 0.9rem; display: block; }
+
+        /* --- 8. RESEARCH (Wide 2-Column Grid) --- */
+        .cards-container {
+            display: grid;
+            gap: 2.5rem;
+            margin-top: 3rem;
+            perspective: 1000px;
+            grid-template-columns: 1fr; /* Mobile Default */
+        }
+
+        @media (min-width: 900px) {
+            .cards-container { grid-template-columns: 1fr 1fr; } /* Desktop Locked */
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            padding: 3rem; border-radius: 24px;
+            box-shadow: var(--shadow-3d);
+            transition: transform 0.1s, box-shadow 0.3s;
+            cursor: pointer; position: relative; overflow: hidden;
+            display: flex; flex-direction: column; justify-content: space-between;
+            min-height: 350px;
+        }
+
+        /* Hover Effect */
+        .glass-card::after {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 60%);
+            opacity: 0; transform: scale(0.5); transition: 0.5s; pointer-events: none;
+        }
+        .glass-card:hover::after { opacity: 1; transform: scale(1); }
+        .glass-card:hover { border-color: var(--blue); }
+
+        .card-tag {
+            background: #eff6ff; color: var(--blue); padding: 6px 14px;
+            border-radius: 8px; font-weight: 700; font-size: 0.8rem; text-transform: uppercase;
+            align-self: flex-start; margin-bottom: 1.5rem;
+        }
+        .glass-card h3 { font-size: 1.6rem; margin-bottom: 1rem; line-height: 1.3; }
+        .glass-card p { color: var(--slate); margin-bottom: 2rem; font-size: 1.05rem; }
+        
+        .card-link { font-weight: 700; color: var(--blue); display: flex; align-items: center; gap: 8px; }
+        .card-link i { transition: 0.2s; }
+        .glass-card:hover .card-link i { transform: translateX(5px); }
+
+        /* --- 9. PUBLICATIONS TIMELINE --- */
+        .timeline-section { background: white; border-radius: 40px; margin-top: 4rem; padding: 6rem 2rem; }
+        .timeline-wrapper { position: relative; max-width: 800px; margin: 0 auto; }
+        
+        .timeline-line {
+            position: absolute; left: 0; top: 20px; bottom: 0; width: 3px; background: #eff6ff;
+        }
+
+        .timeline-entry {
+            padding-left: 3.5rem; margin-bottom: 4rem; position: relative;
+        }
+        .timeline-entry::before {
+            content: ''; position: absolute; left: -6px; top: 5px; width: 15px; height: 15px;
+            background: white; border: 4px solid var(--blue); border-radius: 50%;
+            z-index: 2; transition: 0.3s;
+        }
+        .timeline-entry:hover::before { background: var(--blue); transform: scale(1.3); }
+
+        .timeline-year {
+            position: absolute; left: -100px; top: 0; font-size: 1.5rem; font-weight: 800; color: #cbd5e1;
+            text-align: right; width: 80px;
+        }
+        .timeline-title { font-size: 1.25rem; margin-bottom: 0.5rem; cursor: pointer; transition: 0.2s; }
+        .timeline-title:hover { color: var(--blue); }
+
+        /* --- 10. TEACHING & SERVICE GRID --- */
+        .ts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3rem; }
+        
+        .teaching-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+        .teach-card {
+            background: white; padding: 1rem; border-radius: 8px; border: 1px solid #e2e8f0;
+            display: flex; align-items: center; gap: 10px; transition: 0.3s;
+        }
+        .teach-card:hover { border-color: var(--blue); transform: translateX(5px); }
+        .teach-card i { color: var(--blue); }
+
+        /* --- 11. FOOTER (Grey & Compact) --- */
+        footer {
+            background: var(--grey-footer);
+            color: #cbd5e1;
+            padding: 4rem 2rem;
+            margin-top: 6rem;
+            font-size: 0.9rem;
+        }
+        
+        .footer-grid {
+            max-width: 1200px; margin: 0 auto;
+            display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 2rem;
+        }
+        
+        .footer-grid h4 { color: white; margin-bottom: 1rem; font-size: 1rem; }
+        
+        .footer-socials { display: flex; gap: 1rem; margin-top: 1rem; }
+        .footer-socials a {
+            width: 35px; height: 35px; border-radius: 50%; background: rgba(255,255,255,0.1);
+            display: flex; align-items: center; justify-content: center; font-size: 1rem; color: white;
+            transition: 0.3s;
+        }
+        .footer-socials a:hover { background: var(--blue); }
+        
+        .footer-link { display: block; color: #94a3b8; margin-bottom: 0.5rem; transition: 0.2s; }
+        .footer-link:hover { color: white; padding-left: 5px; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 1024px) {
+            .hero { grid-template-columns: 1fr; text-align: center; padding-top: 140px; }
+            .hero-img-wrapper { max-width: 400px; margin: 3rem auto 0; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .bio-grid { grid-template-columns: 1fr; }
+            .ts-grid { grid-template-columns: 1fr; }
+            .timeline-year { position: relative; left: 0; text-align: left; margin-bottom: 0.5rem; color: var(--blue); }
+            .timeline-entry { padding-left: 2rem; }
+            .timeline-line { left: 9px; }
+            .timeline-entry::before { left: 3px; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; position: absolute; top: 80px; left: 0; width: 100%; background: white; flex-direction: column; padding: 2rem; }
+            .nav-links.active { display: flex; }
+            .mobile-toggle { display: block; }
+            .hero h1 { font-size: 2.5rem; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .footer-socials { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">Dr.Mueen<span>.Uddin</span></a>
+            
+            <div class="nav-links" id="navLinks">
+                <a href="#about" onclick="toggleMenu()">About</a>
+                <a href="#research" onclick="toggleMenu()">Research</a>
+                <a href="#publications" onclick="toggleMenu()">Publications</a>
+                <a href="#teaching" onclick="toggleMenu()">Teaching</a>
+                <a href="#contact" onclick="toggleMenu()">Contact</a>
+            </div>
+
+            <div class="mobile-toggle" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero" id="about">
+        <div class="hero-text reveal">
+            <div class="hero-badge"><i class="fas fa-certificate"></i> Top 2% Scientist (Stanford 2022-2025)</div>
+            <h1>Associate Professor of<br>Data & Cybersecurity</h1>
+            <p class="hero-role">University of Doha for Science & Technology, Qatar</p>
+            <p style="color: var(--slate); margin-bottom: 2.5rem; font-size: 1.1rem; max-width: 600px;">
+                Driving innovation in <strong>Blockchain, Green IT, and Smart Cities</strong>. With over 220+ publications and 7,800+ citations, I build secure, decentralized systems for critical national infrastructure.
+            </p>
+            
+            <div class="btn-group">
+                <a href="#research" class="btn btn-primary">Featured Research</a>
+                <a href="https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en" target="_blank" class="btn btn-outline">Google Scholar</a>
+            </div>
+        </div>
+
+        <div class="hero-img-wrapper reveal">
+            <img src="profile.jpeg" alt="Dr. Mueen Uddin" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?name=Mueen+Uddin&background=020c1b&color=fff&size=500'">
+        </div>
+    </section>
+
+    <div class="stats-banner reveal" id="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3 class="counter" data-target="7870">0</h3>
+                <p>Citations</p>
+            </div>
+            <div class="stat-item">
+                <h3 class="counter" data-target="45">0</h3>
+                <p>h-index</p>
+            </div>
+            <div class="stat-item">
+                <h3 class="counter" data-target="220">0</h3>
+                <p>Publications</p>
+            </div>
+            <div class="stat-item">
+                <h3 class="counter" data-target="14">0</h3>
+                <p>Years Exp.</p>
+            </div>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="section-header reveal">
+            <h2>Biography & Education</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="bio-grid">
+            <div class="bio-text reveal">
+                <p>I am currently an Associate Professor of Data and Cybersecurity at the <strong>College of Computing and Information Technology, University of Doha for Science & Technology (UDST), Doha, Qatar</strong>. Recognized among the top 2% of research scientists globally by Stanford University and Elsevier for four consecutive years (2022–2025), I maintain a rigorous balance of Research (60%), Teaching (30%), and Community Service (10%).</p>
+                <p>I completed my <strong>Ph.D. in Information Systems</strong> at Universiti Teknologi Malaysia (UTM) in 2013, with a doctoral thesis titled <em>“Energy Efficient and Low Carbon Enabler Green IT Framework for Data Centers”</em>. Throughout my 14-year academic career, I have served in key roles across Malaysia, UAE, KSA, Pakistan, and Brunei, consistently receiving performance evaluations above 90%.</p>
+            </div>
+
+            <div class="edu-card reveal">
+                <h3 style="margin-bottom: 1.5rem;">Academic Journey</h3>
+                <div class="edu-item">
+                    <span class="edu-year">2013</span>
+                    <h4>Ph.D. in Information Systems</h4>
+                    <p style="font-size:0.9rem; color:#64748b;">Universiti Teknologi Malaysia (UTM)</p>
+                </div>
+                <div class="edu-item">
+                    <span class="edu-year">2008</span>
+                    <h4>M.Sc. in Computer Science</h4>
+                    <p style="font-size:0.9rem; color:#64748b;">Isra University, Pakistan</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="research">
+        <div class="section-header reveal">
+            <h2>Research Grants & Projects</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="cards-container">
+            <div class="glass-card reveal" onmousemove="tilt(event, this)" onmouseleave="resetTilt(this)">
+                <div>
+                    <div class="card-tag">QRDI Grant 2025</div>
+                    <h3>Q-POPs Environmental Monitoring</h3>
+                    <p>Developing "Q-CDEC," a private Hyperledger Blockchain platform to securely store and process environmental data samples for Qatar's persistent organic pollutants.</p>
+                </div>
+                <a href="#" class="card-link">View Project <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="glass-card reveal" onmousemove="tilt(event, this)" onmouseleave="resetTilt(this)">
+                <div>
+                    <div class="card-tag">Fintech Security</div>
+                    <h3>Blockchain for DeFi</h3>
+                    <p>Investigating blockchain tokenization and NFTs to establish secure digital identities, mitigating phishing and identity theft in Decentralized Finance (DeFi) ecosystems.</p>
+                </div>
+                <a href="#" class="card-link">View Project <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="glass-card reveal" onmousemove="tilt(event, this)" onmouseleave="resetTilt(this)">
+                <div>
+                    <div class="card-tag">National Security</div>
+                    <h3>Post-Quantum Cryptography</h3>
+                    <p>Designing a resilient Post-Quantum Resistant Cryptographic (PQRC) system to protect Critical National Infrastructure (CNI) using a decentralized, private PKI.</p>
+                </div>
+                <a href="#" class="card-link">View Project <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="glass-card reveal" onmousemove="tilt(event, this)" onmouseleave="resetTilt(this)">
+                <div>
+                    <div class="card-tag">Smart Cities</div>
+                    <h3>DSCoT Architecture</h3>
+                    <p>Created the "Decentralized Smart City of Things" (DSCoT) architecture, extending ERC-721 NFTs to authenticate and digitize IoT assets within Cyber-Physical Systems.</p>
+                </div>
+                <a href="#" class="card-link">View Project <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="publications">
+        <div class="timeline-section reveal">
+            <div class="section-header" style="text-align: center;">
+                <h2>Selected Publications (2023-2026)</h2>
+                <div class="line" style="margin: 0 auto;"></div>
+                <p style="margin-top: 1rem; color: #64748b;">A curated list of high-impact research.</p>
+            </div>
+
+            <div class="timeline-wrapper">
+                <div class="timeline-line"></div>
+
+                <div class="timeline-entry reveal">
+                    <span class="timeline-year">2026</span>
+                    <div class="timeline-title" onclick="window.open('https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en')">Agentic AI in Cybersecurity: Autonomous Threat Intelligence</div>
+                    <p style="font-style: italic; color: #64748b;">Submitted to ICT Express (IF-4.8) | Mueen Uddin et al.</p>
+                </div>
+
+                <div class="timeline-entry reveal">
+                    <span class="timeline-year">2026</span>
+                    <div class="timeline-title" onclick="window.open('https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en')">TUB-IoT: Quantum Trust-Based Big Data UAV Architecture</div>
+                    <p style="font-style: italic; color: #64748b;">IEEE Open Journal of Communication Society (IF-6.1)</p>
+                </div>
+
+                <div class="timeline-entry reveal">
+                    <span class="timeline-year">2026</span>
+                    <div class="timeline-title" onclick="window.open('https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en')">Unlocking the Potential of Novel NFTs for IoT Asset Authentication</div>
+                    <p style="font-style: italic; color: #64748b;">Blockchain Research and Applications (IF-6.9)</p>
+                </div>
+
+                <div class="timeline-entry reveal">
+                    <span class="timeline-year">2025</span>
+                    <div class="timeline-title" onclick="window.open('https://doi.org/10.1007/s10462-025-11219-5')">Generative AI Revolution in Cyber Security</div>
+                    <p style="font-style: italic; color: #64748b;">Artificial Intelligence Review (IF-10.7)</p>
+                </div>
+
+                <div class="timeline-entry reveal">
+                    <span class="timeline-year">2025</span>
+                    <div class="timeline-title" onclick="window.open('https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en')">SEIMR: Secure Ethical IoT Mixed Reality Framework</div>
+                    <p style="font-style: italic; color: #64748b;">IEEE Transactions on Consumer Electronics (IF-10.9)</p>
+                </div>
+
+                <div class="timeline-entry reveal">
+                    <span class="timeline-year">2025</span>
+                    <div class="timeline-title" onclick="window.open('https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en')">DASHES–Autonomous Framework for Connected Healthcare</div>
+                    <p style="font-style: italic; color: #64748b;">IEEE Transactions on Consumer Electronics (IF-10.8)</p>
+                </div>
+
+                <div class="timeline-entry reveal">
+                    <span class="timeline-year">2025</span>
+                    <div class="timeline-title" onclick="window.open('https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en')">Q-CoG: Holistic Cognition Framework for Secure Scalable IoT</div>
+                    <p style="font-style: italic; color: #64748b;">Submitted to IEEE Transactions on Emerging Topics in CI</p>
+                </div>
+
+                <div class="timeline-entry reveal">
+                    <span class="timeline-year">2024</span>
+                    <div class="timeline-title" onclick="window.open('https://doi.org/10.1109/ACCESS.2024.3484574')">Plant Leaf Disease Detection using Ensemble Learning</div>
+                    <p style="font-style: italic; color: #64748b;">IEEE Access (IF-3.6)</p>
+                </div>
+
+                <div class="timeline-entry reveal">
+                    <span class="timeline-year">2024</span>
+                    <div class="timeline-title" onclick="window.open('https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en')">Novel NFT Solution for Assets Digitization in Cyber-Physical Systems</div>
+                    <p style="font-style: italic; color: #64748b;">IEEE Open Journal of Computer Society</p>
+                </div>
+
+                <div class="timeline-entry reveal">
+                    <span class="timeline-year">2024</span>
+                    <div class="timeline-title" onclick="window.open('https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en')">Exploring Convergence of Metaverse, Blockchain, and AI</div>
+                    <p style="font-style: italic; color: #64748b;">WIRE Data Mining and Knowledge Discovery</p>
+                </div>
+
+                <div class="timeline-entry reveal">
+                    <span class="timeline-year">2023</span>
+                    <div class="timeline-title" onclick="window.open('https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en')">Unveiling the Metaverse: Emerging Trends & Perspectives</div>
+                    <p style="font-style: italic; color: #64748b;">IEEE Access</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en" target="_blank" class="btn btn-primary">View All on Google Scholar</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="teaching">
+        <div class="section-header reveal">
+            <h2>Teaching & Service</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="ts-grid reveal">
+            <div>
+                <h3 style="margin-bottom: 1.5rem; color: var(--blue);">Teaching Areas</h3>
+                <div class="teaching-list">
+                    <div class="teach-card"><i class="fas fa-shield-alt"></i> <span>Cybersecurity</span></div>
+                    <div class="teach-card"><i class="fas fa-code"></i> <span>Secure Coding</span></div>
+                    <div class="teach-card"><i class="fas fa-key"></i> <span>Cryptography</span></div>
+                    <div class="teach-card"><i class="fas fa-search"></i> <span>Digital Forensics</span></div>
+                    <div class="teach-card"><i class="fas fa-cubes"></i> <span>Blockchain</span></div>
+                    <div class="teach-card"><i class="fas fa-network-wired"></i> <span>Networks</span></div>
+                </div>
+            </div>
+
+            <div>
+                <h3 style="margin-bottom: 1.5rem; color: var(--blue);">Service & Editorial</h3>
+                <div class="edu-card">
+                    <ul style="list-style: none; color: #475569;">
+                        <li style="margin-bottom: 15px;"><i class="fas fa-check-circle" style="color:var(--blue); margin-right:8px;"></i> <strong>Associate Editor:</strong> IEEE Access</li>
+                        <li style="margin-bottom: 15px;"><i class="fas fa-check-circle" style="color:var(--blue); margin-right:8px;"></i> <strong>Associate Editor:</strong> PLOS ONE</li>
+                        <li style="margin-bottom: 15px;"><i class="fas fa-check-circle" style="color:var(--blue); margin-right:8px;"></i> <strong>Associate Editor:</strong> Scientific Reports</li>
+                        <li style="margin-bottom: 15px;"><i class="fas fa-check-circle" style="color:var(--blue); margin-right:8px;"></i> <strong>Senior Member:</strong> IEEE</li>
+                        <li style="margin-bottom: 15px;"><i class="fas fa-check-circle" style="color:var(--blue); margin-right:8px;"></i> <strong>Member:</strong> IEEE P3722 Standards Working Group</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-grid">
+            <div>
+                <h4>Dr. Mueen Uddin</h4>
+                <p style="opacity: 0.7; margin-bottom: 1rem;">University of Doha for Science & Technology.<br>Doha, Qatar.</p>
+                <div class="footer-socials">
+                    <a href="mailto:Mueen.uddin@udst.edu.qa"><i class="fas fa-envelope"></i></a>
+                    <a href="https://www.linkedin.com/in/mueen-uddin-bbba4b16/"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en"><i class="fas fa-graduation-cap"></i></a>
+                </div>
+            </div>
+            
+            <div>
+                <h4>Contact Info</h4>
+                <p style="opacity: 0.7;">Mueen.malik@ieee.org</p>
+                <p style="opacity: 0.7;">(+974) 66025403</p>
+            </div>
+            
+            <div>
+                <h4>Menu</h4>
+                <a href="#about" class="footer-link">About</a>
+                <a href="#research" class="footer-link">Research</a>
+                <a href="#publications" class="footer-link">Publications</a>
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 3rem; opacity: 0.4; font-size: 0.8rem;">&copy; 2026 Dr. Mueen Uddin. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // 1. Mobile Menu
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // 2. 3D Tilt Effect
+        function tilt(e, card) {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = ((y - centerY) / centerY) * -5;
+            const rotateY = ((x - centerX) / centerX) * 5;
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        }
+
+        function resetTilt(card) {
+            card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
+        }
+
+        // 3. Scroll Animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // 4. Number Counter Animation
+        const statsObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counters = entry.target.querySelectorAll('.counter');
+                    counters.forEach(counter => {
+                        const target = +counter.getAttribute('data-target');
+                        const speed = 200; // The lower the slower
+                        const increment = target / speed;
+                        
+                        const updateCount = () => {
+                            const count = +counter.innerText.replace('+', '');
+                            if (count < target) {
+                                counter.innerText = Math.ceil(count + increment) + (target > 100 ? "+" : "");
+                                setTimeout(updateCount, 20);
+                            } else {
+                                counter.innerText = target + "+";
+                            }
+                        };
+                        updateCount();
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        const statsSection = document.querySelector('#stats');
+        if(statsSection) statsObserver.observe(statsSection);
+
+        // 5. Dynamic Mobile CSS
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @media (max-width: 768px) {
+                .nav-links.active {
+                    display: flex; position: absolute; top: 80px; left: 0; width: 100%;
+                    background: white; flex-direction: column; padding: 2rem;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
