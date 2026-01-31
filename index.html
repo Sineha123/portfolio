@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Mueen Uddin | Associate Professor</title>
+    <title>Dr. Mueen Uddin | Top 2% Scientist</title>
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
@@ -12,17 +12,20 @@
         /* --- 1. THEME VARIABLES --- */
         :root {
             --navy: #020c1b;
+            --navy-light: #112240;
             --blue: #2563eb;
-            --blue-light: #eff6ff;
+            --blue-glow: rgba(37, 99, 235, 0.4);
             --slate: #475569;
             --light-bg: #f8fafc;
             --white: #ffffff;
             
             --sidebar-width: 300px;
-            --nav-height: 70px;
+            --nav-height: 80px;
             
-            --glass: rgba(255, 255, 255, 0.9);
-            --shadow-card: 0 10px 30px -10px rgba(2, 12, 27, 0.1);
+            --glass: rgba(255, 255, 255, 0.95);
+            --glass-footer: rgba(2, 12, 27, 0.85); /* Dark Glass for Footer */
+            --shadow-card: 0 20px 40px -15px rgba(2, 12, 27, 0.15);
+            --shadow-thick: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             --transition: cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
@@ -34,7 +37,7 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--light-bg);
             color: var(--slate);
-            line-height: 1.7;
+            line-height: 1.8;
             display: flex;
             min-height: 100vh;
         }
@@ -49,7 +52,7 @@
         a { text-decoration: none; color: inherit; transition: all 0.3s var(--transition); }
         ul { list-style: none; }
 
-        /* --- 3. LEFT SIDEBAR (Fixed) --- */
+        /* --- 3. SIDEBAR --- */
         .sidebar {
             width: var(--sidebar-width);
             height: 100vh;
@@ -57,178 +60,257 @@
             top: 0; left: 0;
             background: var(--white);
             border-right: 1px solid #e2e8f0;
-            padding: 2.5rem 2rem;
+            padding: 2.5rem 1.5rem;
             display: flex; flex-direction: column; align-items: center; text-align: center;
             z-index: 100;
             overflow-y: auto;
+            box-shadow: 5px 0 20px rgba(0,0,0,0.03);
         }
 
         .profile-img-container {
-            width: 170px; height: 170px; margin-bottom: 1.5rem; position: relative;
+            width: 180px; height: 180px; margin-bottom: 1.5rem; position: relative;
         }
         .profile-img {
             width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
-            border: 5px solid var(--light-bg);
-            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.15);
+            border: 6px solid var(--light-bg);
+            box-shadow: var(--shadow-thick);
         }
 
-        .sidebar h1 { font-size: 1.5rem; line-height: 1.2; margin-bottom: 0.5rem; }
+        .sidebar h1 { font-size: 1.6rem; line-height: 1.2; margin-bottom: 0.5rem; }
         .sidebar-title { font-size: 0.9rem; font-weight: 600; color: var(--blue); margin-bottom: 1.5rem; }
         
-        .sidebar-info { width: 100%; text-align: left; font-size: 0.85rem; margin-bottom: 2rem; color: #64748b; }
+        .sidebar-info { width: 100%; text-align: left; font-size: 0.85rem; margin-bottom: 2rem; color: #64748b; border-top: 1px solid #f1f5f9; padding-top: 1rem; }
         .sidebar-info p { margin-bottom: 0.8rem; display: flex; align-items: center; gap: 10px; }
-        .sidebar-info i { color: var(--navy); width: 15px; }
+        .sidebar-info i { color: var(--navy); width: 18px; }
 
-        .sidebar-socials { display: flex; justify-content: center; gap: 10px; margin-top: auto; flex-wrap: wrap; }
+        .sidebar-socials { display: flex; justify-content: center; gap: 12px; margin-top: auto; flex-wrap: wrap; }
         .social-btn {
-            width: 40px; height: 40px; border-radius: 50%;
-            background: var(--blue-light); color: var(--blue);
+            width: 42px; height: 42px; border-radius: 50%;
+            background: var(--light-bg); color: var(--blue);
             display: flex; align-items: center; justify-content: center;
-            transition: 0.3s; font-size: 1.1rem;
+            transition: 0.3s; font-size: 1.2rem; border: 1px solid #e2e8f0;
         }
-        .social-btn:hover { background: var(--blue); color: white; transform: translateY(-3px); }
+        .social-btn:hover { background: var(--blue); color: white; transform: translateY(-5px); box-shadow: 0 5px 15px var(--blue-glow); }
 
-        /* --- 4. TOP NAVBAR (Glassmorphism) --- */
+        /* --- 4. TOP NAVBAR --- */
         .top-nav {
             position: fixed; top: 0; left: var(--sidebar-width); right: 0;
             height: var(--nav-height);
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
             z-index: 900;
             display: flex; align-items: center; justify-content: flex-end;
             padding: 0 3rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.02);
         }
 
-        .nav-links { display: flex; gap: 2.5rem; }
+        .nav-links { display: flex; gap: 2rem; }
         .nav-link { 
-            font-weight: 600; font-size: 0.95rem; color: var(--navy); position: relative; padding: 5px 0;
+            font-weight: 700; font-size: 0.9rem; color: var(--navy); position: relative; padding: 5px 0;
+            text-transform: uppercase; letter-spacing: 0.5px;
         }
         .nav-link::after {
-            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
+            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 3px;
             background: var(--blue); transition: 0.3s;
         }
         .nav-link:hover::after, .nav-link.active::after { width: 100%; }
         .nav-link:hover { color: var(--blue); }
 
-        .menu-toggle { display: none; position: fixed; top: 15px; right: 15px; z-index: 1100; background: var(--blue); color: white; padding: 10px; border-radius: 8px; cursor: pointer; }
+        .menu-toggle { display: none; position: fixed; top: 15px; right: 15px; z-index: 1100; background: var(--blue); color: white; padding: 12px; border-radius: 8px; cursor: pointer; }
 
-        /* --- 5. MAIN CONTENT --- */
+        /* --- 5. MAIN CONTENT WRAPPER --- */
         .main-wrapper {
             margin-left: var(--sidebar-width);
             margin-top: var(--nav-height);
             flex: 1;
             padding: 3rem 4rem;
-            max-width: 1400px;
+            max-width: 1600px;
         }
 
-        /* Hero / Biography */
-        .bio-section { margin-bottom: 4rem; animation: fadeUp 0.8s ease-out; }
-        .hero-badge {
-            display: inline-block; background: var(--navy); color: white;
-            padding: 6px 14px; border-radius: 30px; font-size: 0.8rem; font-weight: 700;
-            margin-bottom: 1rem;
-        }
-        .bio-title { font-size: 3rem; margin-bottom: 1.5rem; line-height: 1.1; }
-        
-        /* Detailed Bio Text */
-        .bio-text { color: var(--slate); margin-bottom: 2rem; text-align: justify; font-size: 1.05rem; }
-        .bio-text p { margin-bottom: 1.2rem; }
-        
-        .btn { padding: 12px 28px; border-radius: 8px; font-weight: 700; display: inline-block; transition: 0.3s; }
-        .btn-primary { background: var(--blue); color: white; box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3); }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(37, 99, 235, 0.4); }
+        /* Generic Section */
+        section { margin-bottom: 6rem; scroll-margin-top: 100px; }
+        .section-header { margin-bottom: 3rem; border-left: 6px solid var(--blue); padding-left: 1.5rem; }
+        .section-header h2 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .section-header p { color: #64748b; font-size: 1.1rem; }
 
-        /* News Ticker */
-        .news-container {
-            background: white; border: 1px solid #e2e8f0; border-radius: 12px;
-            padding: 1.5rem; margin-bottom: 4rem;
-        }
-        .news-title { font-weight: 800; color: var(--navy); margin-bottom: 1rem; display: flex; align-items: center; gap: 10px; }
-        .news-item { display: flex; gap: 1.5rem; padding: 10px 0; border-bottom: 1px dashed #f1f5f9; font-size: 0.95rem; }
-        .news-date { font-weight: 700; color: var(--blue); min-width: 90px; }
+        .btn { padding: 12px 30px; border-radius: 10px; font-weight: 700; display: inline-block; transition: 0.3s; font-size: 0.95rem; }
+        .btn-primary { background: var(--blue); color: white; box-shadow: 0 10px 25px -5px var(--blue-glow); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 35px -5px var(--blue-glow); }
 
-        /* Animated Stats */
-        .stats-grid {
-            display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem;
-            background: white; padding: 2rem; border-radius: 16px;
-            box-shadow: var(--shadow-card); margin-bottom: 4rem; text-align: center;
+        /* --- 6. BIOGRAPHY --- */
+        .bio-text { 
+            color: var(--slate); margin-bottom: 2rem; text-align: justify; font-size: 1.05rem; 
+            background: white; padding: 2.5rem; border-radius: 20px; box-shadow: var(--shadow-card);
         }
-        .stat-num { font-size: 2.5rem; font-weight: 800; color: var(--blue); display: block; }
-        .stat-label { font-size: 0.85rem; text-transform: uppercase; font-weight: 700; color: #94a3b8; letter-spacing: 1px; }
+        .bio-text p { margin-bottom: 1.5rem; }
 
-        /* Research Cards (3D Tilt) */
-        .section-header { margin-bottom: 2rem; border-left: 5px solid var(--blue); padding-left: 1.5rem; }
-        .section-header h2 { font-size: 2.2rem; margin-bottom: 0.5rem; }
-        
+        /* --- 7. EXPERIENCE TIMELINE --- */
+        .timeline-exp { position: relative; padding-left: 2rem; border-left: 3px solid #e2e8f0; }
+        .exp-item {
+            position: relative; margin-bottom: 3rem; background: white; padding: 2rem;
+            border-radius: 16px; border: 1px solid #f1f5f9; box-shadow: var(--shadow-card);
+            transition: 0.3s;
+        }
+        .exp-item:hover { transform: translateX(10px); border-color: var(--blue); }
+        .exp-dot {
+            position: absolute; left: -42px; top: 20px; width: 20px; height: 20px;
+            background: var(--blue); border: 4px solid white; border-radius: 50%; box-shadow: 0 0 0 3px #e2e8f0;
+        }
+        .exp-date { font-weight: 800; color: var(--blue); display: block; margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.85rem; }
+        .exp-role { font-size: 1.3rem; font-weight: 700; color: var(--navy); }
+        .exp-loc { font-size: 1rem; color: #64748b; font-style: italic; margin-bottom: 1rem; }
+
+        /* --- 8. RESEARCH CARDS (Fixed Alignment) --- */
         .research-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; perspective: 1000px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; perspective: 1000px;
         }
         
-        .tilt-card {
-            background: white; padding: 2.5rem; border-radius: 16px;
-            border: 1px solid #f1f5f9; position: relative;
-            transform-style: preserve-3d; transition: transform 0.1s;
-            cursor: pointer; display: flex; flex-direction: column; justify-content: space-between;
-            min-height: 360px;
-        }
-        .tilt-card:hover { border-color: var(--blue); }
-        .tilt-shadow {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            border-radius: 16px; box-shadow: var(--shadow-card); opacity: 0;
-            transition: 0.3s; z-index: -1;
-        }
-        .tilt-card:hover .tilt-shadow { opacity: 1; box-shadow: 0 30px 60px -15px rgba(37, 99, 235, 0.15); }
+       /* --- UPDATED RESEARCH CARD CSS (For Perfect Alignment) --- */
+.tilt-card {
+    background: white; 
+    padding: 2.5rem; 
+    border-radius: 20px;
+    border: 1px solid #f1f5f9; 
+    position: relative;
+    transform-style: preserve-3d; 
+    transition: transform 0.1s;
+    cursor: pointer; 
+    
+    /* FLEXBOX MAGIC FOR ALIGNMENT */
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between;
+    height: 100%; /* Force cards to take full height of grid cell */
+    box-shadow: var(--shadow-thick);
+}
 
-        .card-tag {
-            background: var(--blue-light); color: var(--blue); padding: 5px 12px; border-radius: 6px;
-            font-size: 0.75rem; font-weight: 700; text-transform: uppercase; align-self: flex-start; margin-bottom: 1rem; transform: translateZ(20px);
-        }
-        .tilt-card h3 { font-size: 1.5rem; margin-bottom: 1rem; transform: translateZ(30px); }
-        .tilt-card p { font-size: 0.95rem; color: #64748b; margin-bottom: 1.5rem; transform: translateZ(20px); }
-        .card-link { font-weight: 700; color: var(--blue); display: flex; align-items: center; gap: 5px; transform: translateZ(30px); }
+.tilt-card:hover { border-color: var(--blue); }
 
-        /* Timeline (Publications) */
-        .timeline { position: relative; padding-left: 2rem; border-left: 2px solid #e2e8f0; margin-left: 10px; }
-        .pub-item { position: relative; margin-bottom: 3rem; opacity: 0; transform: translateX(20px); transition: 0.6s ease-out; }
-        .pub-item.visible { opacity: 1; transform: translateX(0); }
-        .pub-dot {
-            position: absolute; left: -41px; top: 6px; width: 16px; height: 16px;
-            background: white; border: 4px solid var(--blue); border-radius: 50%; transition: 0.3s;
-        }
-        .pub-item:hover .pub-dot { background: var(--blue); transform: scale(1.3); }
-        .pub-year { font-size: 0.9rem; font-weight: 800; color: var(--blue); margin-bottom: 0.3rem; display: block; }
-        .pub-title { font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: 0.4rem; cursor: pointer; line-height: 1.4; }
-        .pub-title:hover { color: var(--blue); }
-        .pub-meta { font-style: italic; font-size: 0.9rem; color: #64748b; }
+/* Wrapper for content to push button down */
+.tilt-content { 
+    transform: translateZ(40px); 
+    display: flex; 
+    flex-direction: column; 
+    flex: 1; /* Takes up all available space */
+}
 
-        /* Teaching & Service Grid */
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3rem; }
-        .info-box { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid #f1f5f9; box-shadow: var(--shadow-card); height: 100%; }
+/* The actual text container inside */
+.tilt-text {
+    flex: 1; /* Pushes the link/button to the bottom */
+}
+
+.card-tag {
+    background: var(--blue-light); 
+    color: var(--blue); 
+    padding: 6px 14px; 
+    border-radius: 8px;
+    font-size: 0.8rem; 
+    font-weight: 700; 
+    text-transform: uppercase; 
+    margin-bottom: 1.5rem; 
+    display: inline-block;
+}
+
+.tilt-card h3 { 
+    font-size: 1.5rem; 
+    margin-bottom: 1rem; 
+    line-height: 1.3; 
+}
+
+.tilt-card p { 
+    font-size: 1rem; 
+    color: #64748b; 
+    margin-bottom: 2rem; 
+}
+
+.card-link { 
+    font-weight: 700; 
+    color: var(--blue); 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+    margin-top: auto; /* Ensures button sticks to bottom */
+    padding-top: 1rem; 
+    border-top: 1px solid #f1f5f9;
+}
+
+/* --- UPDATED FOOTER CSS (Glassmorphism) --- */
+footer {
+    margin-top: 8rem; 
+    padding: 4rem 0;
+    text-align: center; 
+    font-size: 0.95rem; 
+    color: #cbd5e1;
+    
+    /* Glass Effect */
+    background: rgba(2, 12, 27, 0.588); /* Semi-transparent Navy */
+    backdrop-filter: blur(16px); 
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+        /* --- 9. PUBLICATIONS --- */
+        .pub-container { background: white; padding: 2rem; border-radius: 20px; box-shadow: var(--shadow-card); }
+        .pub-item {
+            padding: 1.5rem; border-bottom: 1px solid #f1f5f9; transition: 0.2s;
+            display: flex; gap: 1.5rem; align-items: flex-start;
+        }
+        .pub-item:last-child { border-bottom: none; }
+        .pub-item:hover { background: #f8fafc; transform: translateX(5px); }
         
-        .teach-list li { margin-bottom: 15px; display: flex; align-items: center; gap: 15px; font-weight: 500; font-size: 0.95rem; }
-        .teach-list i { color: var(--blue); width: 20px; }
-
-        /* Footer */
-        footer {
-            margin-top: 6rem; padding: 3rem 0; border-top: 1px solid #e2e8f0;
-            color: #94a3b8; font-size: 0.9rem; text-align: center;
-            background: var(--navy); color: white; border-radius: 16px 16px 0 0;
+        .pub-icon { 
+            min-width: 50px; height: 50px; background: var(--blue-light); color: var(--blue);
+            border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
         }
+        .pub-year { font-weight: 800; color: var(--blue); font-size: 0.9rem; margin-bottom: 0.3rem; display: block; }
+        .pub-title { 
+            font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; cursor: pointer; line-height: 1.4;
+            text-decoration: underline; text-decoration-color: transparent; transition: 0.3s;
+        }
+        .pub-title:hover { color: var(--blue); text-decoration-color: var(--blue); }
+        .pub-meta { font-size: 0.9rem; color: #64748b; }
 
-        /* Animations */
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        /* --- 10. STATS --- */
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-top: 2rem; text-align: center;
+        }
+        .stat-card {
+            background: white; padding: 2rem; border-radius: 16px; 
+            box-shadow: var(--shadow-card); border: 1px solid #e2e8f0;
+        }
+        .stat-num { font-size: 3rem; font-weight: 800; color: var(--blue); display: block; margin-bottom: 0.5rem; }
+        .stat-label { font-size: 0.9rem; font-weight: 700; color: #94a3b8; letter-spacing: 1px; text-transform: uppercase; }
 
-        /* Responsive */
+        /* --- 11. TEACHING --- */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2rem; }
+        .info-box { 
+            background: white; padding: 2.5rem; border-radius: 20px; border: 1px solid #f1f5f9; 
+            box-shadow: var(--shadow-card); height: 100%; 
+        }
+        .info-box h3 { margin-bottom: 1.5rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 1rem; }
+        .list-check li { list-style: none; margin-bottom: 12px; display: flex; gap: 12px; align-items: flex-start; font-weight: 500; }
+        .list-check i { color: var(--blue); margin-top: 5px; }
+
+        .tool-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 1.5rem; }
+        .tool-tag { background: #f1f5f9; padding: 5px 12px; border-radius: 6px; font-size: 0.85rem; color: var(--slate); font-weight: 600; border: 1px solid #e2e8f0; }
+
+       
+
+        /* --- RESPONSIVE --- */
         @media (max-width: 1024px) {
             .sidebar { transform: translateX(-100%); transition: 0.3s; }
-            .sidebar.active { transform: translateX(0); box-shadow: 10px 0 50px rgba(0,0,0,0.1); }
-            .top-nav { left: 0; justify-content: center; display:none; }
+            .sidebar.active { transform: translateX(0); box-shadow: 10px 0 50px rgba(0,0,0,0.2); }
+            .top-nav { display: none; }
             .menu-toggle { display: block; }
             .main-wrapper { margin-left: 0; margin-top: 0; padding: 4rem 2rem; }
-            .research-grid { grid-template-columns: 1fr; }
-            .grid-2 { grid-template-columns: 1fr; }
-            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .research-grid, .grid-2, .stats-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .pub-item { flex-direction: column; gap: 0.8rem; }
+            .pub-icon { width: 40px; height: 40px; font-size: 1rem; align-self: flex-start; }
+            .pub-title { font-size: 1rem; }
         }
     </style>
 </head>
@@ -240,7 +322,6 @@
         <div class="profile-img-container">
             <img src="profile.jpeg" alt="Dr. Mueen Uddin" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?name=Mueen+Uddin&background=020c1b&color=fff&size=200'">
         </div>
-        
         <h1>Dr. Mueen Uddin</h1>
         <p class="sidebar-title">Associate Professor<br>Data & Cybersecurity</p>
         
@@ -248,6 +329,7 @@
             <p><i class="fas fa-university"></i> UDST, Doha, Qatar</p>
             <p><i class="fas fa-envelope"></i> Mueen.uddin@udst.edu.qa</p>
             <p><i class="fas fa-award"></i> Top 2% Scientist</p>
+            <p><i class="fas fa-map-marker-alt"></i> Doha, Qatar</p>
         </div>
 
         <div class="sidebar-socials">
@@ -261,6 +343,7 @@
     <nav class="top-nav">
         <div class="nav-links">
             <a href="#about" class="nav-link active">Biography</a>
+            <a href="#experience" class="nav-link">Experience</a>
             <a href="#research" class="nav-link">Research</a>
             <a href="#publications" class="nav-link">Publications</a>
             <a href="#teaching" class="nav-link">Teaching</a>
@@ -270,197 +353,618 @@
 
     <main class="main-wrapper">
         
-        <section id="about" class="bio-section">
-            <span class="hero-badge">Top 2% Scientist (Stanford 2022-2025)</span>
-            <h1 class="bio-title">Biography</h1>
+        <section id="about" class="bio-section reveal">
+            <div class="section-header">
+                <h2>Biography</h2>
+                <p>Top 2% Research Scientist | Senior Member IEEE</p>
+            </div>
             
             <div class="bio-text">
-                <p>I am currently an Associate Professor of Data and Cybersecurity at the <strong>College of Computing and Information Technology, University of Doha for Science & Technology (UDST), Doha, Qatar</strong>. My academic journey is driven by a passion for teaching, innovative research, and community service. I have consistently maintained a high standard of performance, balancing Research (60%), Teaching (30%), and Service (10%).</p>
+                <p>I am currently an Associate Professor of Data and Cybersecurity at the <strong>University of Doha for Science & Technology (UDST)</strong>, Qatar. My primary motivations for employment are teaching, research, and community service. I have maintained balance by demonstrating strong competency in Research (60%), Teaching (30%), and Community Service (10%).</p>
                 
-                <p>I completed my <strong>Ph.D. in Information Systems</strong> at Universiti Teknologi Malaysia (UTM) in 2013[cite: 22]. My doctoral thesis, titled <em>“Energy Efficient and Low Carbon Enabler Green IT Framework for Data Centers”</em>, proposed a groundbreaking framework for evaluating and deploying energy-efficient cloud data centers. The findings were published in the Tier-1 journal, Renewable & Sustainable Energy Reviews[cite: 22, 23].</p>
+                <p>I completed my <strong>Ph.D. in Information Systems</strong> at Universiti Teknologi Malaysia (UTM) in 2013. My doctoral thesis was titled <em>“Energy Efficient and Low Carbon Enabler Green IT Framework for Data Centers in Pakistan”</em>, where I proposed an implementation framework to evaluate and deploy energy-efficient cloud data centers. The findings were published in a Tier-1 journal, Renewable & Sustainable Energy Reviews (IF-14.9).</p>
                 
-                <p>Throughout my 14-year career, I have held academic positions in Malaysia, UAE, KSA, Pakistan, and Brunei[cite: 25]. My research expertise spans <strong>Cybersecurity, Digital Forensics, Blockchain & Distributed Ledger Technology, and Cloud Computing</strong>. I have authored over <strong>220 peer-reviewed papers</strong>, with more than 180 in Q-ranked journals, achieving a cumulative Impact Factor exceeding 400[cite: 27, 29]. I am also the recipient of multiple research grants and awards, including the "Best Researcher Award" from UDST in 2024[cite: 214].</p>
+                <p>Throughout my 14-year academic career, I have gained international recognition through innovative research, strong leadership, and hands-on teaching in Cybersecurity, Digital Forensics, Blockchain, and Cloud Computing. This is shown by consistent excellence with scores above 90% in faculty performance evaluations over the past eight years at various universities in Malaysia, UAE, KSA, Pakistan, and Brunei.</p>
+                
+                <p>I have authored over <strong>200 papers</strong> in reputable Scopus and SCI-indexed journals. Notably, more than 180 of my publications are in Q-ranked journals with a combined Impact Factor exceeding 400. I am listed among the <strong>top 2% of research scientists</strong> by Stanford University and Elsevier for 2022, 2023, 2024, and 2025.</p>
             </div>
-            
-            <a href="https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en" target="_blank" class="btn btn-primary">View Google Scholar</a>
+
+            <div class="stats-grid" id="stats">
+                <div class="stat-card">
+                    <span class="stat-num counter" data-target="7870">0</span>
+                    <span class="stat-label">Citations</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-num counter" data-target="45">0</span>
+                    <span class="stat-label">H-Index</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-num counter" data-target="220">0</span>
+                    <span class="stat-label">Publications</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-num counter" data-target="14">0</span>
+                    <span class="stat-label">Years Exp.</span>
+                </div>
+            </div>
         </section>
 
-        <div class="news-container">
-            <div class="news-title"><i class="fas fa-bullhorn"></i> Latest Updates</div>
-            <div class="news-item"><span class="news-date">Jan 2026</span><span>Submitted "Agentic AI in Cybersecurity" to ICT Express (IF-4.8)[cite: 395].</span></div>
-            <div class="news-item"><span class="news-date">Jan 2026</span><span>Awarded QRDI Grant as PI for "Q-POPs Environmental Monitoring"[cite: 379].</span></div>
-            <div class="news-item"><span class="news-date">Dec 2025</span><span>Ranked in Stanford Top 2% Scientists (4th consecutive year)[cite: 5].</span></div>
-            <div class="news-item"><span class="news-date">Oct 2025</span><span>Volunteered as Proctor for IEEE Xtreme 19.0 Programming Competition[cite: 216].</span></div>
-        </div>
-
-        <div class="stats-grid" id="stats">
-            <div><span class="stat-num counter" data-target="7870">0</span><span class="stat-label">Citations</span></div>
-            <div><span class="stat-num counter" data-target="45">0</span><span class="stat-label">h-index</span></div>
-            <div><span class="stat-num counter" data-target="220">0</span><span class="stat-label">Publications</span></div>
-            <div><span class="stat-num counter" data-target="14">0</span><span class="stat-label">Years Exp.</span></div>
-        </div>
-
-        <section id="research">
-            <div class="section-header">
-                <h2>Research Grants & Projects</h2>
-                <p style="color:var(--slate);">Leading international projects in Blockchain, AI, and Critical Infrastructure.</p>
+        <section id="experience" class="reveal">
+            <div class="section-header"><h2>Professional Experience</h2></div>
+            <div class="timeline-exp">
+                <div class="exp-item">
+                    <div class="exp-dot"></div>
+                    <span class="exp-date">July 2022 - Present</span>
+                    <div class="exp-role">Associate Professor (Data & Cybersecurity)</div>
+                    <div class="exp-loc">University of Doha for Science & Technology (UDST), Qatar</div>
+                    <p>Teaching advanced courses in Digital Forensics, Applied Cryptography, and Secure Software Development. Member of College Curriculum Committee.</p>
+                </div>
+                <div class="exp-item">
+                    <div class="exp-dot"></div>
+                    <span class="exp-date">Jan 2021 - June 2022</span>
+                    <div class="exp-role">Assistant Professor & Research Coordinator</div>
+                    <div class="exp-loc">Universiti Brunei Darussalam (UBD)</div>
+                    <p>Postgraduate Program Coordinator. Led research on lightweight authentication for IoT.</p>
+                </div>
+                <div class="exp-item">
+                    <div class="exp-dot"></div>
+                    <span class="exp-date">Oct 2019 - March 2020</span>
+                    <div class="exp-role">Postdoc Research Fellow</div>
+                    <div class="exp-loc">Khalifa University, UAE</div>
+                    <p>Project: IoT-Driven Blockchain Solution for Healthcare Supply Chain Management.</p>
+                </div>
+                <div class="exp-item">
+                    <div class="exp-dot"></div>
+                    <span class="exp-date">Oct 2015 - June 2019</span>
+                    <div class="exp-role">Assistant Professor (Information Systems)</div>
+                    <div class="exp-loc">Effat University, Saudi Arabia</div>
+                    <p>Led "Cloud and IoT Security Systems Research Group" and secured ABET accreditation.</p>
+                </div>
+                <div class="exp-item">
+                    <div class="exp-dot"></div>
+                    <span class="exp-date">Oct 2014 - July 2015</span>
+                    <div class="exp-role">Senior Lecturer</div>
+                    <div class="exp-loc">University Malaysia Pahang</div>
+                </div>
             </div>
-            
+        </section>
+
+        <section id="education" class="reveal">
+            <div class="section-header"><h2>Education & Honors</h2></div>
+            <div class="grid-2">
+                <div class="info-box">
+                    <h3>Degrees</h3>
+                    <ul class="list-check">
+                        <li>
+                            <i class="fas fa-graduation-cap"></i> 
+                            <div>
+                                <strong>Ph.D. in Information Systems (2013)</strong><br>
+                                <span style="font-size:0.9rem; color:#64748b;">Universiti Teknologi Malaysia (UTM)</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-graduation-cap"></i> 
+                            <div>
+                                <strong>M.Sc. in Computer Science (2008)</strong><br>
+                                <span style="font-size:0.9rem; color:#64748b;">Isra University, Pakistan (CGPA 3.85)</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-graduation-cap"></i> 
+                            <div>
+                                <strong>B.Sc. in Computer Science (2005)</strong><br>
+                                <span style="font-size:0.9rem; color:#64748b;">Isra University, Pakistan</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="info-box">
+                    <h3>Honors & Awards</h3>
+                    <ul class="list-check">
+                        <li><i class="fas fa-trophy"></i> Best Researcher Award, UDST Qatar (2024)</li>
+                        <li><i class="fas fa-star"></i> Outstanding Associate Editor, IEEE Access (2023)</li>
+                        <li><i class="fas fa-certificate"></i> Best Paper Award, AAAI 2026</li>
+                        <li><i class="fas fa-medal"></i> Best FYP Project Award, UDST (2025)</li>
+                        <li><i class="fas fa-award"></i> UTM ZAMALAH Ph.D. Fellowship (2010)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="research" class="reveal">
+            <div class="section-header"><h2>Research Grants</h2></div>
             <div class="research-grid">
                 <div class="tilt-card" onmousemove="tilt(event, this)" onmouseleave="resetTilt(this)">
-                    <div class="tilt-shadow"></div>
-                    <div>
-                        <span class="card-tag">QRDI Grant 2025</span>
-                        <h3>Q-POPs Environmental Monitoring</h3>
-                        <p><strong>Principal Investigator.</strong> Developing "Q-CDEC," a private Hyperledger Blockchain platform to securely store environmental data samples for Qatar's persistent organic pollutants [cite: 34-37].</p>
+                    <div class="tilt-inner">
+                        <div class="tilt-text-content">
+                            <span class="card-tag">QRDI Qatar (2025)</span>
+                            <h3>Q-POPs Environmental Monitoring</h3>
+                            <p><strong>Principal Investigator.</strong> Developing "Q-CDEC," a private Hyperledger Blockchain platform to securely store environmental data samples for Qatar's persistent organic pollutants.</p>
+                        </div>
+                        <span class="card-link">View Details <i class="fas fa-arrow-right"></i></span>
                     </div>
-                    <span class="card-link">View Project <i class="fas fa-arrow-right"></i></span>
                 </div>
 
                 <div class="tilt-card" onmousemove="tilt(event, this)" onmouseleave="resetTilt(this)">
-                    <div class="tilt-shadow"></div>
-                    <div>
-                        <span class="card-tag">Fintech Security</span>
-                        <h3>Blockchain for DeFi</h3>
-                        <p><strong>Principal Investigator (Hail Univ).</strong> Investigating blockchain tokenization and NFTs to establish secure digital identities, mitigating phishing in Decentralized Finance [cite: 42-47].</p>
+                    <div class="tilt-inner">
+                        <div class="tilt-text-content">
+                            <span class="card-tag">Hail University (2025)</span>
+                            <h3>Blockchain for DeFi</h3>
+                            <p><strong>Principal Investigator.</strong> Investigating blockchain tokenization and NFTs to establish secure digital identities, mitigating phishing and identity theft in Decentralized Finance (DeFi).</p>
+                        </div>
+                        <span class="card-link">View Details <i class="fas fa-arrow-right"></i></span>
                     </div>
-                    <span class="card-link">View Project <i class="fas fa-arrow-right"></i></span>
                 </div>
 
                 <div class="tilt-card" onmousemove="tilt(event, this)" onmouseleave="resetTilt(this)">
-                    <div class="tilt-shadow"></div>
-                    <div>
-                        <span class="card-tag">National Security</span>
-                        <h3>Post-Quantum Cryptography</h3>
-                        <p><strong>Research Grant.</strong> Designing a resilient Post-Quantum Resistant Cryptographic (PQRC) system to protect Critical National Infrastructure (CNI) using a decentralized, private PKI [cite: 48-53].</p>
+                    <div class="tilt-inner">
+                        <div class="tilt-text-content">
+                            <span class="card-tag">CNI Protection</span>
+                            <h3>Post-Quantum Cryptography</h3>
+                            <p><strong>Research Grant.</strong> Designing a resilient Post-Quantum Resistant Cryptographic (PQRC) system to protect Critical National Infrastructure (CNI) using a decentralized, private PKI.</p>
+                        </div>
+                        <span class="card-link">View Details <i class="fas fa-arrow-right"></i></span>
                     </div>
-                    <span class="card-link">View Project <i class="fas fa-arrow-right"></i></span>
                 </div>
 
                 <div class="tilt-card" onmousemove="tilt(event, this)" onmouseleave="resetTilt(this)">
-                    <div class="tilt-shadow"></div>
-                    <div>
-                        <span class="card-tag">Smart Cities</span>
-                        <h3>DSCoT Architecture</h3>
-                        <p><strong>PhD Supervision.</strong> Created "Decentralized Smart City of Things" (DSCoT), extending ERC-721 NFTs to authenticate IoT assets in Cyber-Physical Systems [cite: 54-64].</p>
+                    <div class="tilt-inner">
+                        <div class="tilt-text-content">
+                            <span class="card-tag">UBD Grant (2021)</span>
+                            <h3>Student Performance Prediction</h3>
+                            <p><strong>Principal Investigator.</strong> Developing an Artificial Neural Network-based Intelligent Model to predict student performance in academic settings.</p>
+                        </div>
+                        <span class="card-link">View Details <i class="fas fa-arrow-right"></i></span>
                     </div>
-                    <span class="card-link">View Project <i class="fas fa-arrow-right"></i></span>
+                </div>
+
+                <div class="tilt-card" onmousemove="tilt(event, this)" onmouseleave="resetTilt(this)">
+                    <div class="tilt-inner">
+                        <div class="tilt-text-content">
+                            <span class="card-tag">UBD Grant (2021)</span>
+                            <h3>Blockchain-Enabled Cloud Security</h3>
+                            <p><strong>Principal Investigator.</strong> Researching next-generation blockchain-enabled virtualized cloud security solutions and identifying open challenges.</p>
+                        </div>
+                        <span class="card-link">View Details <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+
+                <div class="tilt-card" onmousemove="tilt(event, this)" onmouseleave="resetTilt(this)">
+                    <div class="tilt-inner">
+                        <div class="tilt-text-content">
+                            <span class="card-tag">UBD Grant (2021)</span>
+                            <h3>IoT Lightweight Authentication</h3>
+                            <p><strong>Principal Investigator.</strong> Designing lightweight authentication, signcryption, and privacy preservation solutions for the Internet of Things (IoT).</p>
+                        </div>
+                        <span class="card-link">View Details <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+
+                <div class="tilt-card" onmousemove="tilt(event, this)" onmouseleave="resetTilt(this)">
+                    <div class="tilt-inner">
+                        <div class="tilt-text-content">
+                            <span class="card-tag">UKM Grant (2022)</span>
+                            <h3>Big Data Irregular Traffic</h3>
+                            <p><strong>Co-Principal Investigator.</strong> Developing a Big Data Analytic Model for Irregular Traffic Detection in High-Speed Networks.</p>
+                        </div>
+                        <span class="card-link">View Details <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+
+                <div class="tilt-card" onmousemove="tilt(event, this)" onmouseleave="resetTilt(this)">
+                    <div class="tilt-inner">
+                        <div class="tilt-text-content">
+                            <span class="card-tag">Effat Grant (2018)</span>
+                            <h3>Hadoop Security Against DDoS</h3>
+                            <p><strong>Principal Investigator.</strong> Building a Hadoop-based Big Data Security Infrastructure against DDoS-based Dyn and MQTT Attacks in Cloud Environments.</p>
+                        </div>
+                        <span class="card-link">View Details <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+
+                <div class="tilt-card" onmousemove="tilt(event, this)" onmouseleave="resetTilt(this)">
+                    <div class="tilt-inner">
+                        <div class="tilt-text-content">
+                            <span class="card-tag">Effat Grant (2016)</span>
+                            <h3>Mobile Ad-Hoc Routing</h3>
+                            <p><strong>Principal Investigator.</strong> Developed an "Energy Efficient Multipath Routing Protocol for Mobile Ad-hoc Networks using Fitness Function".</p>
+                        </div>
+                        <span class="card-link">View Details <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+
+                <div class="tilt-card" onmousemove="tilt(event, this)" onmouseleave="resetTilt(this)">
+                    <div class="tilt-inner">
+                        <div class="tilt-text-content">
+                            <span class="card-tag">Effat Grant (2018)</span>
+                            <h3>IoT DDoS Defense</h3>
+                            <p><strong>Principal Investigator.</strong> Created a robust security infrastructure against IoT device-based DDoS attacks in cloud incentives.</p>
+                        </div>
+                        <span class="card-link">View Details <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+
+                <div class="tilt-card" onmousemove="tilt(event, this)" onmouseleave="resetTilt(this)">
+                    <div class="tilt-inner">
+                        <div class="tilt-text-content">
+                            <span class="card-tag">UMP Grant (2015)</span>
+                            <h3>Green Cloud Data Centers</h3>
+                            <p><strong>Principal Investigator.</strong> Evaluated power-efficient algorithms for energy efficiency and carbon emission reduction in cloud data centers.</p>
+                        </div>
+                        <span class="card-link">View Details <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+
+                <div class="tilt-card" onmousemove="tilt(event, this)" onmouseleave="resetTilt(this)">
+                    <div class="tilt-inner">
+                        <div class="tilt-text-content">
+                            <span class="card-tag">Khalifa Univ (2019)</span>
+                            <h3>Healthcare Blockchain</h3>
+                            <p><strong>Research Fellow.</strong> Developed IoT-Driven Blockchain Solutions for Healthcare Supply Chain management (Ministry of Health UAE).</p>
+                        </div>
+                        <span class="card-link">View Details <i class="fas fa-arrow-right"></i></span>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="publications" style="margin-top: 5rem;">
+        <section id="publications" class="reveal">
             <div class="section-header">
-                <h2>Selected Publications</h2>
-                <p style="color:var(--slate);">Highlighting recent high-impact research (2024-2026).</p>
-            </div>
-            <div class="timeline">
-                <div class="pub-item">
-                    <div class="pub-dot"></div>
-                    <span class="pub-year">2026</span>
-                    <div class="pub-title" onclick="window.open('https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en')">Agentic AI in Cybersecurity: Autonomous Threat Intelligence</div>
-                    <p class="pub-meta">Mueen Uddin et al. | Submitted to ICT Express (IF-4.8) [cite: 395]</p>
-                </div>
-                <div class="pub-item">
-                    <div class="pub-dot"></div>
-                    <span class="pub-year">2026</span>
-                    <div class="pub-title" onclick="window.open('https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en')">TUB-IoT: Quantum Trust-Based Big Data UAV Architecture</div>
-                    <p class="pub-meta">IEEE Open Journal of Communication Society (IF-6.1) [cite: 392]</p>
-                </div>
-                <div class="pub-item">
-                    <div class="pub-dot"></div>
-                    <span class="pub-year">2025</span>
-                    <div class="pub-title" onclick="window.open('https://doi.org/10.1007/s10462-025-11219-5')">Generative AI Revolution in Cyber Security: Review of Threat Intelligence</div>
-                    <p class="pub-meta">Artificial Intelligence Review (IF-10.7) [cite: 407]</p>
-                </div>
-                <div class="pub-item">
-                    <div class="pub-dot"></div>
-                    <span class="pub-year">2025</span>
-                    <div class="pub-title" onclick="window.open('https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en')">SEIMR: Secure Ethical IoT Mixed Reality Framework</div>
-                    <p class="pub-meta">IEEE Transactions on Consumer Electronics (IF-10.9) [cite: 402]</p>
-                </div>
-                <div class="pub-item">
-                    <div class="pub-dot"></div>
-                    <span class="pub-year">2025</span>
-                    <div class="pub-title" onclick="window.open('https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en')">DASHES–Autonomous Framework for Connected Healthcare</div>
-                    <p class="pub-meta">IEEE Transactions on Consumer Electronics (IF-10.8) [cite: 405]</p>
-                </div>
-                <div class="pub-item">
-                    <div class="pub-dot"></div>
-                    <span class="pub-year">2024</span>
-                    <div class="pub-title" onclick="window.open('https://doi.org/10.1109/ACCESS.2024.3484574')">Plant Leaf Disease Detection using Ensemble Learning</div>
-                    <p class="pub-meta">IEEE Access (IF-3.6) [cite: 469]</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="teaching" style="margin-top: 5rem;">
-            <div class="section-header">
-                <h2>Teaching Philosophy & Courses</h2>
+                <h2>Publications (2023-2026)</h2>
+                <p>Over 200+ papers. Click any title to find it on Google Scholar.</p>
             </div>
             
-            <div style="background:white; padding:2rem; border-left:4px solid var(--blue); margin-bottom:2rem; color:#64748b; font-style:italic;">
-                "An effective learning environment requires <strong>Challenge, Respect, and Enjoyment</strong>. I advocate case-based teaching to illustrate complex theoretical aspects and use real-world projects to engage students." [cite: 756, 770]
-            </div>
+            <div class="pub-container">
+                <div class="pub-item">
+                    <div class="pub-icon"><i class="fas fa-file-alt"></i></div>
+                    <div>
+                        <span class="pub-year">2026</span>
+                        <div class="pub-title" onclick="googleSearch(this)">Agentic AI in Cybersecurity: Autonomous Threat Intelligence, Ethical Challenges, and Future Directions</div>
+                        <span class="pub-meta">Mueen Uddin et al. | Submitted to ICT Express (IF-4.8)</span>
+                    </div>
+                </div>
 
+                <div class="pub-item">
+                    <div class="pub-icon"><i class="fas fa-file-alt"></i></div>
+                    <div>
+                        <span class="pub-year">2026</span>
+                        <div class="pub-title" onclick="googleSearch(this)">TUB-IoT: Quantum Trust-Based Big Data UAV Architecture for Security Centric Internet of Things</div>
+                        <span class="pub-meta">IEEE Open Journal of Communication Society (IF-6.1)</span>
+                    </div>
+                </div>
+
+                <div class="pub-item">
+                    <div class="pub-icon"><i class="fas fa-file-alt"></i></div>
+                    <div>
+                        <span class="pub-year">2026</span>
+                        <div class="pub-title" onclick="googleSearch(this)">Unlocking the Potential of Novel NFTs for IoT Asset Authentication in Cyber-Physical Systems</div>
+                        <span class="pub-meta">Blockchain Research and Applications (IF-6.9)</span>
+                    </div>
+                </div>
+                
+                <div class="pub-item">
+                    <div class="pub-icon"><i class="fas fa-file-alt"></i></div>
+                    <div>
+                        <span class="pub-year">2026</span>
+                        <div class="pub-title" onclick="googleSearch(this)">A Novel Monocular 3D Human Pose Refinement Method using Anthropometric Constraints</div>
+                        <span class="pub-meta">The Visual Computer (IF-3.0)</span>
+                    </div>
+                </div>
+
+                <div class="pub-item">
+                    <div class="pub-icon"><i class="fas fa-file-alt"></i></div>
+                    <div>
+                        <span class="pub-year">2026</span>
+                        <div class="pub-title" onclick="googleSearch(this)">Editorial: Leveraging Information Systems and Artificial Intelligence for Public Health Advancements</div>
+                        <span class="pub-meta">Frontiers in Public Health (IF-4.0)</span>
+                    </div>
+                </div>
+
+                <div class="pub-item">
+                    <div class="pub-icon"><i class="fas fa-file-alt"></i></div>
+                    <div>
+                        <span class="pub-year">2026</span>
+                        <div class="pub-title" onclick="googleSearch(this)">A Comprehensive Review of Trustworthy Artificial Intelligence, Clinical Integration, and Responsible Governance in Healthcare</div>
+                        <span class="pub-meta">IEEE Access (IF-3.6)</span>
+                    </div>
+                </div>
+
+                <div class="pub-item">
+                    <div class="pub-icon"><i class="fas fa-file-alt"></i></div>
+                    <div>
+                        <span class="pub-year">2026</span>
+                        <div class="pub-title" onclick="googleSearch(this)">Generative AI Security for Smart Infrastructures: A Systematic Review of Threats, Defenses and Regulatory Challenges</div>
+                        <span class="pub-meta">WIRE Data Mining & Knowledge Discovery (IF-11.5)</span>
+                    </div>
+                </div>
+
+                <div class="pub-item">
+                    <div class="pub-icon"><i class="fas fa-file-alt"></i></div>
+                    <div>
+                        <span class="pub-year">2026</span>
+                        <div class="pub-title" onclick="googleSearch(this)">LLM-Driven Multi Agent Framework for Autonomous Network Slice Management: Architecture and Proof of Concept Experiments</div>
+                        <span class="pub-meta">Wireless Networks (IF-3.2)</span>
+                    </div>
+                </div>
+
+                <div class="pub-item">
+                    <div class="pub-icon"><i class="fas fa-file-alt"></i></div>
+                    <div>
+                        <span class="pub-year">2026</span>
+                        <div class="pub-title" onclick="googleSearch(this)">CR-GNN: Contextual Relation-Aware Graph Neural Network</div>
+                        <span class="pub-meta">IEEE JBHI (IF-6.5)</span>
+                    </div>
+                </div>
+
+                <div class="pub-item">
+                    <div class="pub-icon"><i class="fas fa-file-alt"></i></div>
+                    <div>
+                        <span class="pub-year">2026</span>
+                        <div class="pub-title" onclick="googleSearch(this)">An Efficient Privacy-Preserving Federated Learning Framework for Smart Healthcare System Integrating Blockchain and Differential Privacy</div>
+                        <span class="pub-meta">IEEE Access (IF-3.6)</span>
+                    </div>
+                </div>
+
+                <div class="pub-item">
+                    <div class="pub-icon"><i class="fas fa-file-alt"></i></div>
+                    <div>
+                        <span class="pub-year">2026</span>
+                        <div class="pub-title" onclick="googleSearch(this)">PPFLF-ASDNAD: A Privacy-Preserving Federated-Learning Framework for Advanced Software-Defined Network-based Attack Detection</div>
+                        <span class="pub-meta">IEEE Access (IF-3.6)</span>
+                    </div>
+                </div>
+
+                <div class="pub-item">
+                    <div class="pub-icon"><i class="fas fa-file-alt"></i></div>
+                    <div>
+                        <span class="pub-year">2025</span>
+                        <div class="pub-title" onclick="googleSearch(this)">Generative AI Revolution in Cyber Security: A Comprehensive Review of Threat Intelligence</div>
+                        <span class="pub-meta">Artificial Intelligence Review (IF-10.7)</span>
+                    </div>
+                </div>
+
+                <div class="pub-item">
+                    <div class="pub-icon"><i class="fas fa-file-alt"></i></div>
+                    <div>
+                        <span class="pub-year">2025</span>
+                        <div class="pub-title" onclick="googleSearch(this)">SEIMR: Secure Ethical IoT Mixed Reality Integration Framework for Metaverse Experiences</div>
+                        <span class="pub-meta">IEEE Transactions on Consumer Electronics (IF-10.9)</span>
+                    </div>
+                </div>
+
+                <div class="pub-item">
+                    <div class="pub-icon"><i class="fas fa-file-alt"></i></div>
+                    <div>
+                        <span class="pub-year">2025</span>
+                        <div class="pub-title" onclick="googleSearch(this)">DASHES–Autonomous and Secure Framework for Explainable Connected Healthcare</div>
+                        <span class="pub-meta">IEEE Transactions on Consumer Electronics (IF-10.8)</span>
+                    </div>
+                </div>
+
+                <div class="pub-item">
+                    <div class="pub-icon"><i class="fas fa-file-alt"></i></div>
+                    <div>
+                        <span class="pub-year">2025</span>
+                        <div class="pub-title" onclick="googleSearch(this)">Q-CoG: Holistic Cognition Framework for Secure Scalable Consumer in IoT Environment</div>
+                        <span class="pub-meta">IEEE Transactions on Emerging Topics in CI</span>
+                    </div>
+                </div>
+
+                <div class="pub-item">
+                    <div class="pub-icon"><i class="fas fa-file-alt"></i></div>
+                    <div>
+                        <span class="pub-year">2025</span>
+                        <div class="pub-title" onclick="googleSearch(this)">SmartGuard: A Secure AI-Driven Framework for Real-Time Remote Healthcare Monitoring</div>
+                        <span class="pub-meta">IEEE Transactions on Consumer Electronics</span>
+                    </div>
+                </div>
+                
+                <div class="pub-item">
+                    <div class="pub-icon"><i class="fas fa-file-alt"></i></div>
+                    <div>
+                        <span class="pub-year">2025</span>
+                        <div class="pub-title" onclick="googleSearch(this)">Hybrid Attribute-Based Access Control Framework for Intelligent Computing in Consumer IIoT</div>
+                        <span class="pub-meta">IEEE Transactions on Consumer Electronics (IF-10.9)</span>
+                    </div>
+                </div>
+                
+                <div class="pub-item">
+                    <div class="pub-icon"><i class="fas fa-file-alt"></i></div>
+                    <div>
+                        <span class="pub-year">2025</span>
+                        <div class="pub-title" onclick="googleSearch(this)">PrivNet—Generative AI-Augmented Quantum Privacy Framework for Vehicular Networks</div>
+                        <span class="pub-meta">IEEE Transactions on Intelligent Transportation Systems (IF-8.0)</span>
+                    </div>
+                </div>
+                
+                <div class="pub-item">
+                    <div class="pub-icon"><i class="fas fa-file-alt"></i></div>
+                    <div>
+                        <span class="pub-year">2025</span>
+                        <div class="pub-title" onclick="googleSearch(this)">A Smart Decentralized Identifiable Distributed Ledger Technology-based Blockchain</div>
+                        <span class="pub-meta">Expert Systems (IF-3.3)</span>
+                    </div>
+                </div>
+
+                <div class="pub-item">
+                    <div class="pub-icon"><i class="fas fa-file-alt"></i></div>
+                    <div>
+                        <span class="pub-year">2025</span>
+                        <div class="pub-title" onclick="googleSearch(this)">QED-Net: Quantum Emotional Dynamics Synthesis Network for Sentiment Analysis in Medical IoT</div>
+                        <span class="pub-meta">IEEE Transactions on Computational Social Science (IF-4.9)</span>
+                    </div>
+                </div>
+
+                <div class="pub-item">
+                    <div class="pub-icon"><i class="fas fa-file-alt"></i></div>
+                    <div>
+                        <span class="pub-year">2025</span>
+                        <div class="pub-title" onclick="googleSearch(this)">HALOGrid–HyperAdaptive Long Short Term Memory Model with Intelligent Grid Optimization</div>
+                        <span class="pub-meta">International Journal of Electrical Power and Energy Systems (IF-5.0)</span>
+                    </div>
+                </div>
+
+                <div class="pub-item">
+                    <div class="pub-icon"><i class="fas fa-file-alt"></i></div>
+                    <div>
+                        <span class="pub-year">2025</span>
+                        <div class="pub-title" onclick="googleSearch(this)">PermGuard: A Scalable Framework for Android Malware Detection Using Permission-to-Exploitation Mapping</div>
+                        <span class="pub-meta">IEEE Access (IF-3.6)</span>
+                    </div>
+                </div>
+
+                <div class="pub-item">
+                    <div class="pub-icon"><i class="fas fa-file-alt"></i></div>
+                    <div>
+                        <span class="pub-year">2025</span>
+                        <div class="pub-title" onclick="googleSearch(this)">Diagnostic Behavior Analysis Of Profuse Data Intrusions In Cyber-Physical Systems Using Adversarial Learning Techniques</div>
+                        <span class="pub-meta">Scientific Reports (IF-3.9)</span>
+                    </div>
+                </div>
+
+                <div class="pub-item">
+                    <div class="pub-icon"><i class="fas fa-file-alt"></i></div>
+                    <div>
+                        <span class="pub-year">2025</span>
+                        <div class="pub-title" onclick="googleSearch(this)">A Novel Deep Reinforcement Learning Framework for Energy Management and Prediction in Smart Cities</div>
+                        <span class="pub-meta">Expert Systems (IF-3.3)</span>
+                    </div>
+                </div>
+
+                <div class="pub-item">
+                    <div class="pub-icon"><i class="fas fa-file-alt"></i></div>
+                    <div>
+                        <span class="pub-year">2025</span>
+                        <div class="pub-title" onclick="googleSearch(this)">AFEL: Adaptive Federated Edge Learning Framework for AIoMT-Driven Healthcare Systems</div>
+                        <span class="pub-meta">Scientific Reports (IF-3.9)</span>
+                    </div>
+                </div>
+
+                <div class="pub-item">
+                    <div class="pub-icon"><i class="fas fa-file-alt"></i></div>
+                    <div>
+                        <span class="pub-year">2024</span>
+                        <div class="pub-title" onclick="googleSearch(this)">A Novel NFT Solution for Assets Digitization and Authentication in Cyber-Physical Systems</div>
+                        <span class="pub-meta">IEEE Open Journal of Computer Society</span>
+                    </div>
+                </div>
+
+                <div class="pub-item">
+                    <div class="pub-icon"><i class="fas fa-file-alt"></i></div>
+                    <div>
+                        <span class="pub-year">2024</span>
+                        <div class="pub-title" onclick="googleSearch(this)">Plant Leaf Disease Detection using Ensemble Learning and Explainable AI</div>
+                        <span class="pub-meta">IEEE Access (IF-3.6)</span>
+                    </div>
+                </div>
+
+                <div class="pub-item">
+                    <div class="pub-icon"><i class="fas fa-file-alt"></i></div>
+                    <div>
+                        <span class="pub-year">2024</span>
+                        <div class="pub-title" onclick="googleSearch(this)">Exploring the Convergence of Metaverse, Blockchain, and AI</div>
+                        <span class="pub-meta">WIRE Data Mining and Knowledge Discovery</span>
+                    </div>
+                </div>
+                
+                <div class="pub-item">
+                    <div class="pub-icon"><i class="fas fa-file-alt"></i></div>
+                    <div>
+                        <span class="pub-year">2024</span>
+                        <div class="pub-title" onclick="googleSearch(this)">A Comprehensive Survey of Aspect-Based Sentiment Analysis</div>
+                        <span class="pub-meta">Knowledge and Information Systems (IF-2.7)</span>
+                    </div>
+                </div>
+
+                <div class="pub-item">
+                    <div class="pub-icon"><i class="fas fa-file-alt"></i></div>
+                    <div>
+                        <span class="pub-year">2023</span>
+                        <div class="pub-title" onclick="googleSearch(this)">Unveiling the Metaverse: Exploring Emerging Trends, Multifaceted Perspectives</div>
+                        <span class="pub-meta">IEEE Access (IF-3.367)</span>
+                    </div>
+                </div>
+                
+                <div class="pub-item">
+                    <div class="pub-icon"><i class="fas fa-file-alt"></i></div>
+                    <div>
+                        <span class="pub-year">2023</span>
+                        <div class="pub-title" onclick="googleSearch(this)">Leveraging a novel NFT-enabled blockchain architecture for the authentication of IoT assets</div>
+                        <span class="pub-meta">Scientific Reports (IF-4.6)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align:center; margin-top:2rem;">
+                <a href="https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en" target="_blank" class="btn btn-primary">View Full List on Google Scholar</a>
+            </div>
+        </section>
+
+        <section id="teaching" class="reveal">
+            <div class="section-header"><h2>Teaching & Supervision</h2></div>
             <div class="grid-2">
                 <div class="info-box">
-                    <h3 style="margin-bottom:1.5rem;">Core Courses</h3>
-                    <ul class="teach-list">
-                        <li><i class="fas fa-shield-alt"></i> Introduction to Data & Cybersecurity [cite: 786]</li>
-                        <li><i class="fas fa-code"></i> Secure Software Development [cite: 787]</li>
-                        <li><i class="fas fa-network-wired"></i> Computer Networks [cite: 797]</li>
-                        <li><i class="fas fa-search"></i> Digital Forensics & Investigations [cite: 792]</li>
-                        <li><i class="fas fa-database"></i> Database Management Systems [cite: 800]</li>
+                    <h3>Courses Taught</h3>
+                    <ul class="list-check">
+                        <li><i class="fas fa-shield-alt"></i> Introduction to Data & Cybersecurity</li>
+                        <li><i class="fas fa-code"></i> Secure Software Development</li>
+                        <li><i class="fas fa-key"></i> Applied Cryptography</li>
+                        <li><i class="fas fa-search"></i> Digital Forensics & Investigations</li>
+                        <li><i class="fas fa-cubes"></i> Blockchain Technologies</li>
+                        <li><i class="fas fa-network-wired"></i> Computer Networks</li>
+                        <li><i class="fas fa-user-secret"></i> Privacy in Digital Era</li>
+                        <li><i class="fas fa-cloud"></i> Cloud Infrastructure & Services</li>
                     </ul>
+                    <div class="tool-tags">
+                        <span class="tool-tag">Kali Linux</span>
+                        <span class="tool-tag">Wireshark</span>
+                        <span class="tool-tag">Autopsy</span>
+                        <span class="tool-tag">NMAP</span>
+                        <span class="tool-tag">FTK Forensic</span>
+                        <span class="tool-tag">Cisco Packet Tracer</span>
+                    </div>
                 </div>
+                
                 <div class="info-box">
-                    <h3 style="margin-bottom:1.5rem;">Advanced & Elective</h3>
-                    <ul class="teach-list">
-                        <li><i class="fas fa-key"></i> Applied Cryptography [cite: 789]</li>
-                        <li><i class="fas fa-cubes"></i> Blockchain Technologies [cite: 793]</li>
-                        <li><i class="fas fa-user-secret"></i> Privacy in the Digital Era [cite: 790]</li>
-                        <li><i class="fas fa-cloud"></i> Cloud Infrastructure & Services [cite: 808]</li>
-                        <li><i class="fas fa-file-contract"></i> Cybersecurity Policies & Strategies [cite: 788]</li>
+                    <h3>Supervision</h3>
+                    <ul class="list-check">
+                        <li><strong>PhD:</strong> Blockchain for NFT-based Asset Auth (Completed 2024)</li>
+                        <li><strong>PhD:</strong> Quantum-Resistant Secure Healthcare (Ongoing)</li>
+                        <li><strong>Masters:</strong> Agentic AI-Enabled Cybersecurity (2025)</li>
+                        <li><strong>FYP:</strong> 40+ Projects supervised at UDST, UBD, Effat</li>
+                        <li><strong>Award:</strong> Best FYP Project Award (UDST 2024, 2025)</li>
                     </ul>
                 </div>
             </div>
         </section>
 
-        <section id="service" style="margin-top: 5rem;">
-            <div class="section-header">
-                <h2>Professional Service</h2>
-                <p style="color:var(--slate);">Actively contributing to the academic community through editorial and leadership roles.</p>
-            </div>
-
+        <section id="service" class="reveal">
+            <div class="section-header"><h2>Professional Service</h2></div>
             <div class="grid-2">
                 <div class="info-box">
-                    <h3 style="margin-bottom:1.5rem;">Editorial Roles</h3>
-                    <ul class="teach-list">
-                        <li><i class="fas fa-pen-fancy"></i> <strong>Associate Editor:</strong> IEEE Access (2022-Present) [cite: 324]</li>
-                        <li><i class="fas fa-pen-fancy"></i> <strong>Academic Editor:</strong> PLOS ONE (2022-Present) [cite: 323]</li>
-                        <li><i class="fas fa-pen-fancy"></i> <strong>Associate Editor:</strong> Scientific Reports (2024-Present) [cite: 322]</li>
-                        <li><i class="fas fa-pen-fancy"></i> <strong>Associate Editor:</strong> Frontiers in Comms & Networks [cite: 330]</li>
+                    <h3>Editorial Roles</h3>
+                    <ul class="list-check">
+                        <li><strong>Associate Editor:</strong> IEEE Access (2022-Present)</li>
+                        <li><strong>Academic Editor:</strong> PLOS ONE (2022-Present)</li>
+                        <li><strong>Associate Editor:</strong> Scientific Reports (2024-Present)</li>
+                        <li><strong>Associate Editor:</strong> Frontiers in Comms & Networks</li>
+                        <li><strong>Board Member:</strong> Blockchain in Healthcare Today</li>
                     </ul>
                 </div>
                 <div class="info-box">
-                    <h3 style="margin-bottom:1.5rem;">Memberships & Committees</h3>
-                    <ul class="teach-list">
-                        <li><i class="fas fa-users"></i> <strong>Senior Member:</strong> IEEE (2021-Present) [cite: 250]</li>
-                        <li><i class="fas fa-users"></i> <strong>Member:</strong> IEEE P3722 Standards Working Group [cite: 215]</li>
-                        <li><i class="fas fa-users"></i> <strong>Member:</strong> IEEE Computer Society (Blockchain TC) [cite: 255]</li>
-                        <li><i class="fas fa-users"></i> <strong>TPC Member:</strong> IEEE ICC, Globecom, VTC [cite: 341-362]</li>
+                    <h3>Memberships & TPC</h3>
+                    <ul class="list-check">
+                        <li><strong>Senior Member:</strong> IEEE (2021-Present)</li>
+                        <li><strong>Member:</strong> IEEE P3722 Standards Working Group</li>
+                        <li><strong>Member:</strong> IEEE Computer Society (Blockchain TC)</li>
+                        <li><strong>Member:</strong> Association of Blockchain Brunei</li>
+                        <li><strong>TPC:</strong> IEEE ICC, Globecom, VTC, HEAd'25</li>
                     </ul>
                 </div>
             </div>
         </section>
 
         <footer>
-            <div style="margin-bottom: 1rem;">
-                <a href="#about" style="color:white; margin:0 10px;">Biography</a> | 
-                <a href="#research" style="color:white; margin:0 10px;">Research</a> | 
-                <a href="#publications" style="color:white; margin:0 10px;">Publications</a>
-            </div>
             <div>&copy; 2026 Dr. Mueen Uddin. All rights reserved.</div>
             <div style="font-size:0.8rem; opacity:0.6; margin-top:0.5rem;">University of Doha for Science & Technology, Qatar</div>
         </footer>
@@ -468,31 +972,32 @@
     </main>
 
     <script>
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('active');
+        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
+        
+        // Smart Google Scholar Search
+        function googleSearch(element) {
+            const title = element.innerText;
+            window.open(`https://scholar.google.com/scholar?q=${encodeURIComponent(title)}`, '_blank');
         }
 
+        // 3D Tilt Logic
         function tilt(e, card) {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const rotateX = ((y - centerY) / centerY) * -5;
-            const rotateY = ((x - centerX) / centerX) * 5;
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            card.style.transform = `perspective(1000px) rotateX(${((y - rect.height/2) / rect.height) * -8}deg) rotateY(${((x - rect.width/2) / rect.width) * 8}deg)`;
         }
-        function resetTilt(card) {
-            card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
-        }
+        function resetTilt(card) { card.style.transform = `perspective(1000px) rotateX(0) rotateY(0)`; }
 
+        // Scroll Reveal Animation
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if(entry.isIntersecting) entry.target.classList.add('visible');
+                if(entry.isIntersecting) entry.target.classList.add('active');
             });
         }, { threshold: 0.1 });
-        document.querySelectorAll('.pub-item').forEach(el => observer.observe(el));
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+        // Stats Count Up Animation
         const statsObserver = new IntersectionObserver((entries, obs) => {
             entries.forEach(entry => {
                 if(entry.isIntersecting) {
@@ -517,19 +1022,9 @@
         const statsSection = document.getElementById('stats');
         if(statsSection) statsObserver.observe(statsSection);
 
+        // Mobile CSS
         const style = document.createElement('style');
-        style.innerHTML = `
-            @media (max-width: 1024px) {
-                .sidebar { transform: translateX(-100%); transition: 0.3s; }
-                .sidebar.active { transform: translateX(0); box-shadow: 10px 0 50px rgba(0,0,0,0.1); }
-                .main-wrapper { margin-left: 0; padding: 3rem 2rem; }
-                .top-nav { left: 0; justify-content: center; display:none;}
-                .menu-toggle { display: block; }
-                .research-grid { grid-template-columns: 1fr; }
-                .grid-2 { grid-template-columns: 1fr; }
-                .stats-grid { grid-template-columns: 1fr 1fr; }
-            }
-        `;
+        style.innerHTML = `@media (max-width: 1024px) { .sidebar { transform: translateX(-100%); transition: 0.3s; } .sidebar.active { transform: translateX(0); box-shadow: 10px 0 50px rgba(0,0,0,0.1); } .top-nav { display:none; } .menu-toggle { display: block; } .main-wrapper { margin-left: 0; padding: 2rem; } .research-grid, .grid-2, .stats-grid { grid-template-columns: 1fr; } }`;
         document.head.appendChild(style);
     </script>
 </body>
