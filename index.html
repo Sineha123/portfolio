@@ -3,22 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Mueen Uddin | Top 2% Scientist</title>
+    <title>Dr. Mueen Uddin | Associate Professor</title>
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
 
     <style>
         /* --- 1. THEME VARIABLES --- */
         :root {
-            --navy: #020c1b;        /* Primary Dark */
-            --blue: #2563eb;        /* Vibrant Accent */
-            --slate: #475569;       /* Text Color */
-            --grey-footer: #1e293b; /* Compact Footer */
+            --navy: #020c1b;
+            --blue: #2563eb;
+            --blue-light: #eff6ff;
+            --slate: #475569;
             --light-bg: #f8fafc;
+            --white: #ffffff;
             
-            --glass: rgba(255, 255, 255, 0.85);
-            --shadow-3d: 0 20px 40px -15px rgba(2, 12, 27, 0.1);
+            --sidebar-width: 300px;
+            --nav-height: 70px;
+            
+            --glass: rgba(255, 255, 255, 0.9);
+            --shadow-card: 0 10px 30px -10px rgba(2, 12, 27, 0.1);
             --transition: cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
@@ -31,551 +35,443 @@
             background-color: var(--light-bg);
             color: var(--slate);
             line-height: 1.7;
-            overflow-x: hidden;
+            display: flex;
+            min-height: 100vh;
         }
 
-        h1, h2, h3, h4 { color: var(--navy); font-weight: 800; letter-spacing: -0.02em; }
+        h1, h2, h3, h4 { 
+            font-family: 'Outfit', sans-serif; 
+            color: var(--navy); 
+            font-weight: 800; 
+            letter-spacing: -0.02em; 
+        }
+        
         a { text-decoration: none; color: inherit; transition: all 0.3s var(--transition); }
         ul { list-style: none; }
 
-        /* --- 3. GLASS NAVBAR --- */
-        nav {
-            position: fixed; top: 0; left: 0; width: 100%; height: 80px;
-            background: rgba(255, 255, 255, 0.7); /* Frosted Glass */
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-            z-index: 1000;
-            display: flex; align-items: center;
+        /* --- 3. LEFT SIDEBAR (Fixed) --- */
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            position: fixed;
+            top: 0; left: 0;
+            background: var(--white);
+            border-right: 1px solid #e2e8f0;
+            padding: 2.5rem 2rem;
+            display: flex; flex-direction: column; align-items: center; text-align: center;
+            z-index: 100;
+            overflow-y: auto;
         }
 
-        .nav-container {
-            width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 2rem;
-            display: flex; justify-content: space-between; align-items: center;
+        .profile-img-container {
+            width: 170px; height: 170px; margin-bottom: 1.5rem; position: relative;
+        }
+        .profile-img {
+            width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
+            border: 5px solid var(--light-bg);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.15);
         }
 
-        .logo { font-size: 1.5rem; font-weight: 800; color: var(--navy); }
-        .logo span { color: var(--blue); }
+        .sidebar h1 { font-size: 1.5rem; line-height: 1.2; margin-bottom: 0.5rem; }
+        .sidebar-title { font-size: 0.9rem; font-weight: 600; color: var(--blue); margin-bottom: 1.5rem; }
+        
+        .sidebar-info { width: 100%; text-align: left; font-size: 0.85rem; margin-bottom: 2rem; color: #64748b; }
+        .sidebar-info p { margin-bottom: 0.8rem; display: flex; align-items: center; gap: 10px; }
+        .sidebar-info i { color: var(--navy); width: 15px; }
+
+        .sidebar-socials { display: flex; justify-content: center; gap: 10px; margin-top: auto; flex-wrap: wrap; }
+        .social-btn {
+            width: 40px; height: 40px; border-radius: 50%;
+            background: var(--blue-light); color: var(--blue);
+            display: flex; align-items: center; justify-content: center;
+            transition: 0.3s; font-size: 1.1rem;
+        }
+        .social-btn:hover { background: var(--blue); color: white; transform: translateY(-3px); }
+
+        /* --- 4. TOP NAVBAR (Glassmorphism) --- */
+        .top-nav {
+            position: fixed; top: 0; left: var(--sidebar-width); right: 0;
+            height: var(--nav-height);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+            z-index: 900;
+            display: flex; align-items: center; justify-content: flex-end;
+            padding: 0 3rem;
+        }
 
         .nav-links { display: flex; gap: 2.5rem; }
-        .nav-links a { 
-            font-weight: 600; font-size: 0.95rem; color: var(--navy); position: relative; 
+        .nav-link { 
+            font-weight: 600; font-size: 0.95rem; color: var(--navy); position: relative; padding: 5px 0;
         }
-        .nav-links a::after {
-            content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+        .nav-link::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
             background: var(--blue); transition: 0.3s;
         }
-        .nav-links a:hover::after { width: 100%; }
-        .nav-links a:hover { color: var(--blue); }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+        .nav-link:hover { color: var(--blue); }
 
-        .mobile-toggle { display: none; font-size: 1.5rem; color: var(--navy); cursor: pointer; }
+        .menu-toggle { display: none; position: fixed; top: 15px; right: 15px; z-index: 1100; background: var(--blue); color: white; padding: 10px; border-radius: 8px; cursor: pointer; }
 
-        /* --- 4. SCROLL ANIMATIONS --- */
-        .reveal {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease-out;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+        /* --- 5. MAIN CONTENT --- */
+        .main-wrapper {
+            margin-left: var(--sidebar-width);
+            margin-top: var(--nav-height);
+            flex: 1;
+            padding: 3rem 4rem;
+            max-width: 1400px;
         }
 
-        /* --- 5. HERO SECTION --- */
-        .hero {
-            padding: 180px 0 100px;
-            max-width: 1200px; margin: 0 auto; padding-left: 2rem; padding-right: 2rem;
-            display: grid; grid-template-columns: 1.1fr 1fr; gap: 4rem; align-items: center;
-        }
-
+        /* Hero / Biography */
+        .bio-section { margin-bottom: 4rem; animation: fadeUp 0.8s ease-out; }
         .hero-badge {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: #eff6ff; color: var(--blue);
-            padding: 8px 16px; border-radius: 50px; font-weight: 700; font-size: 0.85rem;
-            margin-bottom: 1.5rem; box-shadow: 0 4px 10px rgba(37, 99, 235, 0.1);
+            display: inline-block; background: var(--navy); color: white;
+            padding: 6px 14px; border-radius: 30px; font-size: 0.8rem; font-weight: 700;
+            margin-bottom: 1rem;
         }
-
-        .hero h1 {
-            font-size: 3.8rem; line-height: 1.1; margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--navy) 0%, #475569 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-
-        .hero-role { font-size: 1.25rem; font-weight: 500; color: var(--slate); margin-bottom: 2.5rem; }
-
-        .btn {
-            padding: 14px 32px; border-radius: 12px; font-weight: 700;
-            transition: transform 0.2s, box-shadow 0.2s; display: inline-block;
-        }
-        .btn-primary {
-            background: var(--blue); color: white; margin-right: 1rem;
-            box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4);
-        }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 30px -5px rgba(37, 99, 235, 0.5); }
+        .bio-title { font-size: 3rem; margin-bottom: 1.5rem; line-height: 1.1; }
         
-        .btn-outline { background: white; border: 1px solid #e2e8f0; color: var(--navy); }
-        .btn-outline:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-3px); }
+        /* Detailed Bio Text */
+        .bio-text { color: var(--slate); margin-bottom: 2rem; text-align: justify; font-size: 1.05rem; }
+        .bio-text p { margin-bottom: 1.2rem; }
+        
+        .btn { padding: 12px 28px; border-radius: 8px; font-weight: 700; display: inline-block; transition: 0.3s; }
+        .btn-primary { background: var(--blue); color: white; box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(37, 99, 235, 0.4); }
 
-        /* 3D Image */
-        .hero-img-wrapper { position: relative; perspective: 1000px; display: flex; justify-content: center; }
-        .profile-img {
-            width: 100%; max-width: 450px; border-radius: 30px;
-            box-shadow: 20px 20px 60px rgba(0,0,0,0.1);
-            transform: rotateY(-5deg) rotateX(2deg); transition: 0.5s;
+        /* News Ticker */
+        .news-container {
+            background: white; border: 1px solid #e2e8f0; border-radius: 12px;
+            padding: 1.5rem; margin-bottom: 4rem;
         }
-        .profile-img:hover { transform: rotateY(0) rotateX(0); }
+        .news-title { font-weight: 800; color: var(--navy); margin-bottom: 1rem; display: flex; align-items: center; gap: 10px; }
+        .news-item { display: flex; gap: 1.5rem; padding: 10px 0; border-bottom: 1px dashed #f1f5f9; font-size: 0.95rem; }
+        .news-date { font-weight: 700; color: var(--blue); min-width: 90px; }
 
-        /* --- 6. STATS (Animated Counters) --- */
-        .stats-banner {
-            background: white; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0;
-            padding: 3rem 0; margin-top: 2rem;
-        }
+        /* Animated Stats */
         .stats-grid {
-            max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr);
-            gap: 2rem; text-align: center;
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem;
+            background: white; padding: 2rem; border-radius: 16px;
+            box-shadow: var(--shadow-card); margin-bottom: 4rem; text-align: center;
         }
-        .stat-item h3 { font-size: 2.5rem; color: var(--blue); margin-bottom: 0.2rem; }
-        .stat-item p { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8; }
+        .stat-num { font-size: 2.5rem; font-weight: 800; color: var(--blue); display: block; }
+        .stat-label { font-size: 0.85rem; text-transform: uppercase; font-weight: 700; color: #94a3b8; letter-spacing: 1px; }
 
-        /* --- 7. CONTENT SECTIONS --- */
-        .section { padding: 7rem 2rem; max-width: 1200px; margin: 0 auto; }
-        .section-header { margin-bottom: 3rem; }
-        .section-header h2 { font-size: 2.5rem; margin-bottom: 1rem; }
-        .section-header .line { width: 60px; height: 5px; background: var(--blue); border-radius: 10px; }
-
-        .bio-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 4rem; }
-        .bio-text p { margin-bottom: 1.5rem; text-align: justify; font-size: 1.05rem; }
-
-        .edu-card {
-            background: white; padding: 2rem; border-radius: 20px;
-            box-shadow: var(--shadow-3d); border: 1px solid white;
+        /* Research Cards (3D Tilt) */
+        .section-header { margin-bottom: 2rem; border-left: 5px solid var(--blue); padding-left: 1.5rem; }
+        .section-header h2 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+        
+        .research-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; perspective: 1000px;
         }
-        .edu-item {
-            padding-left: 1.5rem; border-left: 3px solid #eff6ff; margin-bottom: 2rem; position: relative;
+        
+        .tilt-card {
+            background: white; padding: 2.5rem; border-radius: 16px;
+            border: 1px solid #f1f5f9; position: relative;
+            transform-style: preserve-3d; transition: transform 0.1s;
+            cursor: pointer; display: flex; flex-direction: column; justify-content: space-between;
+            min-height: 360px;
         }
-        .edu-item::before {
-            content: ''; position: absolute; left: -9px; top: 0; width: 15px; height: 15px;
-            background: var(--blue); border: 3px solid white; border-radius: 50%;
+        .tilt-card:hover { border-color: var(--blue); }
+        .tilt-shadow {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            border-radius: 16px; box-shadow: var(--shadow-card); opacity: 0;
+            transition: 0.3s; z-index: -1;
         }
-        .edu-year { color: var(--blue); font-weight: 700; font-size: 0.9rem; display: block; }
-
-        /* --- 8. RESEARCH (Wide 2-Column Grid) --- */
-        .cards-container {
-            display: grid;
-            gap: 2.5rem;
-            margin-top: 3rem;
-            perspective: 1000px;
-            grid-template-columns: 1fr; /* Mobile Default */
-        }
-
-        @media (min-width: 900px) {
-            .cards-container { grid-template-columns: 1fr 1fr; } /* Desktop Locked */
-        }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            padding: 3rem; border-radius: 24px;
-            box-shadow: var(--shadow-3d);
-            transition: transform 0.1s, box-shadow 0.3s;
-            cursor: pointer; position: relative; overflow: hidden;
-            display: flex; flex-direction: column; justify-content: space-between;
-            min-height: 350px;
-        }
-
-        /* Hover Effect */
-        .glass-card::after {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 60%);
-            opacity: 0; transform: scale(0.5); transition: 0.5s; pointer-events: none;
-        }
-        .glass-card:hover::after { opacity: 1; transform: scale(1); }
-        .glass-card:hover { border-color: var(--blue); }
+        .tilt-card:hover .tilt-shadow { opacity: 1; box-shadow: 0 30px 60px -15px rgba(37, 99, 235, 0.15); }
 
         .card-tag {
-            background: #eff6ff; color: var(--blue); padding: 6px 14px;
-            border-radius: 8px; font-weight: 700; font-size: 0.8rem; text-transform: uppercase;
-            align-self: flex-start; margin-bottom: 1.5rem;
+            background: var(--blue-light); color: var(--blue); padding: 5px 12px; border-radius: 6px;
+            font-size: 0.75rem; font-weight: 700; text-transform: uppercase; align-self: flex-start; margin-bottom: 1rem; transform: translateZ(20px);
         }
-        .glass-card h3 { font-size: 1.6rem; margin-bottom: 1rem; line-height: 1.3; }
-        .glass-card p { color: var(--slate); margin-bottom: 2rem; font-size: 1.05rem; }
+        .tilt-card h3 { font-size: 1.5rem; margin-bottom: 1rem; transform: translateZ(30px); }
+        .tilt-card p { font-size: 0.95rem; color: #64748b; margin-bottom: 1.5rem; transform: translateZ(20px); }
+        .card-link { font-weight: 700; color: var(--blue); display: flex; align-items: center; gap: 5px; transform: translateZ(30px); }
+
+        /* Timeline (Publications) */
+        .timeline { position: relative; padding-left: 2rem; border-left: 2px solid #e2e8f0; margin-left: 10px; }
+        .pub-item { position: relative; margin-bottom: 3rem; opacity: 0; transform: translateX(20px); transition: 0.6s ease-out; }
+        .pub-item.visible { opacity: 1; transform: translateX(0); }
+        .pub-dot {
+            position: absolute; left: -41px; top: 6px; width: 16px; height: 16px;
+            background: white; border: 4px solid var(--blue); border-radius: 50%; transition: 0.3s;
+        }
+        .pub-item:hover .pub-dot { background: var(--blue); transform: scale(1.3); }
+        .pub-year { font-size: 0.9rem; font-weight: 800; color: var(--blue); margin-bottom: 0.3rem; display: block; }
+        .pub-title { font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: 0.4rem; cursor: pointer; line-height: 1.4; }
+        .pub-title:hover { color: var(--blue); }
+        .pub-meta { font-style: italic; font-size: 0.9rem; color: #64748b; }
+
+        /* Teaching & Service Grid */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3rem; }
+        .info-box { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid #f1f5f9; box-shadow: var(--shadow-card); height: 100%; }
         
-        .card-link { font-weight: 700; color: var(--blue); display: flex; align-items: center; gap: 8px; }
-        .card-link i { transition: 0.2s; }
-        .glass-card:hover .card-link i { transform: translateX(5px); }
+        .teach-list li { margin-bottom: 15px; display: flex; align-items: center; gap: 15px; font-weight: 500; font-size: 0.95rem; }
+        .teach-list i { color: var(--blue); width: 20px; }
 
-        /* --- 9. PUBLICATIONS TIMELINE --- */
-        .timeline-section { background: white; border-radius: 40px; margin-top: 4rem; padding: 6rem 2rem; }
-        .timeline-wrapper { position: relative; max-width: 800px; margin: 0 auto; }
-        
-        .timeline-line {
-            position: absolute; left: 0; top: 20px; bottom: 0; width: 3px; background: #eff6ff;
-        }
-
-        .timeline-entry {
-            padding-left: 3.5rem; margin-bottom: 4rem; position: relative;
-        }
-        .timeline-entry::before {
-            content: ''; position: absolute; left: -6px; top: 5px; width: 15px; height: 15px;
-            background: white; border: 4px solid var(--blue); border-radius: 50%;
-            z-index: 2; transition: 0.3s;
-        }
-        .timeline-entry:hover::before { background: var(--blue); transform: scale(1.3); }
-
-        .timeline-year {
-            position: absolute; left: -100px; top: 0; font-size: 1.5rem; font-weight: 800; color: #cbd5e1;
-            text-align: right; width: 80px;
-        }
-        .timeline-title { font-size: 1.25rem; margin-bottom: 0.5rem; cursor: pointer; transition: 0.2s; }
-        .timeline-title:hover { color: var(--blue); }
-
-        /* --- 10. TEACHING & SERVICE GRID --- */
-        .ts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3rem; }
-        
-        .teaching-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
-        .teach-card {
-            background: white; padding: 1rem; border-radius: 8px; border: 1px solid #e2e8f0;
-            display: flex; align-items: center; gap: 10px; transition: 0.3s;
-        }
-        .teach-card:hover { border-color: var(--blue); transform: translateX(5px); }
-        .teach-card i { color: var(--blue); }
-
-        /* --- 11. FOOTER (Grey & Compact) --- */
+        /* Footer */
         footer {
-            background: var(--grey-footer);
-            color: #cbd5e1;
-            padding: 4rem 2rem;
-            margin-top: 6rem;
-            font-size: 0.9rem;
+            margin-top: 6rem; padding: 3rem 0; border-top: 1px solid #e2e8f0;
+            color: #94a3b8; font-size: 0.9rem; text-align: center;
+            background: var(--navy); color: white; border-radius: 16px 16px 0 0;
         }
-        
-        .footer-grid {
-            max-width: 1200px; margin: 0 auto;
-            display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 2rem;
-        }
-        
-        .footer-grid h4 { color: white; margin-bottom: 1rem; font-size: 1rem; }
-        
-        .footer-socials { display: flex; gap: 1rem; margin-top: 1rem; }
-        .footer-socials a {
-            width: 35px; height: 35px; border-radius: 50%; background: rgba(255,255,255,0.1);
-            display: flex; align-items: center; justify-content: center; font-size: 1rem; color: white;
-            transition: 0.3s;
-        }
-        .footer-socials a:hover { background: var(--blue); }
-        
-        .footer-link { display: block; color: #94a3b8; margin-bottom: 0.5rem; transition: 0.2s; }
-        .footer-link:hover { color: white; padding-left: 5px; }
 
-        /* --- RESPONSIVE --- */
+        /* Animations */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Responsive */
         @media (max-width: 1024px) {
-            .hero { grid-template-columns: 1fr; text-align: center; padding-top: 140px; }
-            .hero-img-wrapper { max-width: 400px; margin: 3rem auto 0; }
+            .sidebar { transform: translateX(-100%); transition: 0.3s; }
+            .sidebar.active { transform: translateX(0); box-shadow: 10px 0 50px rgba(0,0,0,0.1); }
+            .top-nav { left: 0; justify-content: center; display:none; }
+            .menu-toggle { display: block; }
+            .main-wrapper { margin-left: 0; margin-top: 0; padding: 4rem 2rem; }
+            .research-grid { grid-template-columns: 1fr; }
+            .grid-2 { grid-template-columns: 1fr; }
             .stats-grid { grid-template-columns: 1fr 1fr; }
-            .bio-grid { grid-template-columns: 1fr; }
-            .ts-grid { grid-template-columns: 1fr; }
-            .timeline-year { position: relative; left: 0; text-align: left; margin-bottom: 0.5rem; color: var(--blue); }
-            .timeline-entry { padding-left: 2rem; }
-            .timeline-line { left: 9px; }
-            .timeline-entry::before { left: 3px; }
-        }
-        @media (max-width: 768px) {
-            .nav-links { display: none; position: absolute; top: 80px; left: 0; width: 100%; background: white; flex-direction: column; padding: 2rem; }
-            .nav-links.active { display: flex; }
-            .mobile-toggle { display: block; }
-            .hero h1 { font-size: 2.5rem; }
-            .footer-grid { grid-template-columns: 1fr; text-align: center; }
-            .footer-socials { justify-content: center; }
         }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="nav-container">
-            <a href="#" class="logo">Dr.Mueen<span>.Uddin</span></a>
-            
-            <div class="nav-links" id="navLinks">
-                <a href="#about" onclick="toggleMenu()">About</a>
-                <a href="#research" onclick="toggleMenu()">Research</a>
-                <a href="#publications" onclick="toggleMenu()">Publications</a>
-                <a href="#teaching" onclick="toggleMenu()">Teaching</a>
-                <a href="#contact" onclick="toggleMenu()">Contact</a>
-            </div>
+    <div class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></div>
 
-            <div class="mobile-toggle" onclick="toggleMenu()">
-                <i class="fas fa-bars"></i>
-            </div>
+    <aside class="sidebar" id="sidebar">
+        <div class="profile-img-container">
+            <img src="profile.jpeg" alt="Dr. Mueen Uddin" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?name=Mueen+Uddin&background=020c1b&color=fff&size=200'">
+        </div>
+        
+        <h1>Dr. Mueen Uddin</h1>
+        <p class="sidebar-title">Associate Professor<br>Data & Cybersecurity</p>
+        
+        <div class="sidebar-info">
+            <p><i class="fas fa-university"></i> UDST, Doha, Qatar</p>
+            <p><i class="fas fa-envelope"></i> Mueen.uddin@udst.edu.qa</p>
+            <p><i class="fas fa-award"></i> Top 2% Scientist</p>
+        </div>
+
+        <div class="sidebar-socials">
+            <a href="https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en" target="_blank" class="social-btn" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+            <a href="https://www.linkedin.com/in/mueen-uddin-bbba4b16/" target="_blank" class="social-btn" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="http://orcid.org/0000-0003-1919-3407" target="_blank" class="social-btn" title="ORCID"><i class="fab fa-orcid"></i></a>
+            <a href="https://www.scopus.com/authid/detail.uri?authorId=42062605100" target="_blank" class="social-btn" title="Scopus"><i class="fas fa-book"></i></a>
+        </div>
+    </aside>
+
+    <nav class="top-nav">
+        <div class="nav-links">
+            <a href="#about" class="nav-link active">Biography</a>
+            <a href="#research" class="nav-link">Research</a>
+            <a href="#publications" class="nav-link">Publications</a>
+            <a href="#teaching" class="nav-link">Teaching</a>
+            <a href="#service" class="nav-link">Service</a>
         </div>
     </nav>
 
-    <section class="hero" id="about">
-        <div class="hero-text reveal">
-            <div class="hero-badge"><i class="fas fa-certificate"></i> Top 2% Scientist (Stanford 2022-2025)</div>
-            <h1>Associate Professor of<br>Data & Cybersecurity</h1>
-            <p class="hero-role">University of Doha for Science & Technology, Qatar</p>
-            <p style="color: var(--slate); margin-bottom: 2.5rem; font-size: 1.1rem; max-width: 600px;">
-                Driving innovation in <strong>Blockchain, Green IT, and Smart Cities</strong>. With over 220+ publications and 7,800+ citations, I build secure, decentralized systems for critical national infrastructure.
-            </p>
+    <main class="main-wrapper">
+        
+        <section id="about" class="bio-section">
+            <span class="hero-badge">Top 2% Scientist (Stanford 2022-2025)</span>
+            <h1 class="bio-title">Biography</h1>
             
-            <div class="btn-group">
-                <a href="#research" class="btn btn-primary">Featured Research</a>
-                <a href="https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en" target="_blank" class="btn btn-outline">Google Scholar</a>
-            </div>
-        </div>
-
-        <div class="hero-img-wrapper reveal">
-            <img src="profile.jpeg" alt="Dr. Mueen Uddin" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?name=Mueen+Uddin&background=020c1b&color=fff&size=500'">
-        </div>
-    </section>
-
-    <div class="stats-banner reveal" id="stats">
-        <div class="stats-grid">
-            <div class="stat-item">
-                <h3 class="counter" data-target="7870">0</h3>
-                <p>Citations</p>
-            </div>
-            <div class="stat-item">
-                <h3 class="counter" data-target="45">0</h3>
-                <p>h-index</p>
-            </div>
-            <div class="stat-item">
-                <h3 class="counter" data-target="220">0</h3>
-                <p>Publications</p>
-            </div>
-            <div class="stat-item">
-                <h3 class="counter" data-target="14">0</h3>
-                <p>Years Exp.</p>
-            </div>
-        </div>
-    </div>
-
-    <section class="section">
-        <div class="section-header reveal">
-            <h2>Biography & Education</h2>
-            <div class="line"></div>
-        </div>
-
-        <div class="bio-grid">
-            <div class="bio-text reveal">
-                <p>I am currently an Associate Professor of Data and Cybersecurity at the <strong>College of Computing and Information Technology, University of Doha for Science & Technology (UDST), Doha, Qatar</strong>. Recognized among the top 2% of research scientists globally by Stanford University and Elsevier for four consecutive years (2022–2025), I maintain a rigorous balance of Research (60%), Teaching (30%), and Community Service (10%).</p>
-                <p>I completed my <strong>Ph.D. in Information Systems</strong> at Universiti Teknologi Malaysia (UTM) in 2013, with a doctoral thesis titled <em>“Energy Efficient and Low Carbon Enabler Green IT Framework for Data Centers”</em>. Throughout my 14-year academic career, I have served in key roles across Malaysia, UAE, KSA, Pakistan, and Brunei, consistently receiving performance evaluations above 90%.</p>
-            </div>
-
-            <div class="edu-card reveal">
-                <h3 style="margin-bottom: 1.5rem;">Academic Journey</h3>
-                <div class="edu-item">
-                    <span class="edu-year">2013</span>
-                    <h4>Ph.D. in Information Systems</h4>
-                    <p style="font-size:0.9rem; color:#64748b;">Universiti Teknologi Malaysia (UTM)</p>
-                </div>
-                <div class="edu-item">
-                    <span class="edu-year">2008</span>
-                    <h4>M.Sc. in Computer Science</h4>
-                    <p style="font-size:0.9rem; color:#64748b;">Isra University, Pakistan</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="research">
-        <div class="section-header reveal">
-            <h2>Research Grants & Projects</h2>
-            <div class="line"></div>
-        </div>
-
-        <div class="cards-container">
-            <div class="glass-card reveal" onmousemove="tilt(event, this)" onmouseleave="resetTilt(this)">
-                <div>
-                    <div class="card-tag">QRDI Grant 2025</div>
-                    <h3>Q-POPs Environmental Monitoring</h3>
-                    <p>Developing "Q-CDEC," a private Hyperledger Blockchain platform to securely store and process environmental data samples for Qatar's persistent organic pollutants.</p>
-                </div>
-                <a href="#" class="card-link">View Project <i class="fas fa-arrow-right"></i></a>
-            </div>
-
-            <div class="glass-card reveal" onmousemove="tilt(event, this)" onmouseleave="resetTilt(this)">
-                <div>
-                    <div class="card-tag">Fintech Security</div>
-                    <h3>Blockchain for DeFi</h3>
-                    <p>Investigating blockchain tokenization and NFTs to establish secure digital identities, mitigating phishing and identity theft in Decentralized Finance (DeFi) ecosystems.</p>
-                </div>
-                <a href="#" class="card-link">View Project <i class="fas fa-arrow-right"></i></a>
-            </div>
-
-            <div class="glass-card reveal" onmousemove="tilt(event, this)" onmouseleave="resetTilt(this)">
-                <div>
-                    <div class="card-tag">National Security</div>
-                    <h3>Post-Quantum Cryptography</h3>
-                    <p>Designing a resilient Post-Quantum Resistant Cryptographic (PQRC) system to protect Critical National Infrastructure (CNI) using a decentralized, private PKI.</p>
-                </div>
-                <a href="#" class="card-link">View Project <i class="fas fa-arrow-right"></i></a>
-            </div>
-
-            <div class="glass-card reveal" onmousemove="tilt(event, this)" onmouseleave="resetTilt(this)">
-                <div>
-                    <div class="card-tag">Smart Cities</div>
-                    <h3>DSCoT Architecture</h3>
-                    <p>Created the "Decentralized Smart City of Things" (DSCoT) architecture, extending ERC-721 NFTs to authenticate and digitize IoT assets within Cyber-Physical Systems.</p>
-                </div>
-                <a href="#" class="card-link">View Project <i class="fas fa-arrow-right"></i></a>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="publications">
-        <div class="timeline-section reveal">
-            <div class="section-header" style="text-align: center;">
-                <h2>Selected Publications (2023-2026)</h2>
-                <div class="line" style="margin: 0 auto;"></div>
-                <p style="margin-top: 1rem; color: #64748b;">A curated list of high-impact research.</p>
-            </div>
-
-            <div class="timeline-wrapper">
-                <div class="timeline-line"></div>
-
-                <div class="timeline-entry reveal">
-                    <span class="timeline-year">2026</span>
-                    <div class="timeline-title" onclick="window.open('https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en')">Agentic AI in Cybersecurity: Autonomous Threat Intelligence</div>
-                    <p style="font-style: italic; color: #64748b;">Submitted to ICT Express (IF-4.8) | Mueen Uddin et al.</p>
-                </div>
-
-                <div class="timeline-entry reveal">
-                    <span class="timeline-year">2026</span>
-                    <div class="timeline-title" onclick="window.open('https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en')">TUB-IoT: Quantum Trust-Based Big Data UAV Architecture</div>
-                    <p style="font-style: italic; color: #64748b;">IEEE Open Journal of Communication Society (IF-6.1)</p>
-                </div>
-
-                <div class="timeline-entry reveal">
-                    <span class="timeline-year">2026</span>
-                    <div class="timeline-title" onclick="window.open('https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en')">Unlocking the Potential of Novel NFTs for IoT Asset Authentication</div>
-                    <p style="font-style: italic; color: #64748b;">Blockchain Research and Applications (IF-6.9)</p>
-                </div>
-
-                <div class="timeline-entry reveal">
-                    <span class="timeline-year">2025</span>
-                    <div class="timeline-title" onclick="window.open('https://doi.org/10.1007/s10462-025-11219-5')">Generative AI Revolution in Cyber Security</div>
-                    <p style="font-style: italic; color: #64748b;">Artificial Intelligence Review (IF-10.7)</p>
-                </div>
-
-                <div class="timeline-entry reveal">
-                    <span class="timeline-year">2025</span>
-                    <div class="timeline-title" onclick="window.open('https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en')">SEIMR: Secure Ethical IoT Mixed Reality Framework</div>
-                    <p style="font-style: italic; color: #64748b;">IEEE Transactions on Consumer Electronics (IF-10.9)</p>
-                </div>
-
-                <div class="timeline-entry reveal">
-                    <span class="timeline-year">2025</span>
-                    <div class="timeline-title" onclick="window.open('https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en')">DASHES–Autonomous Framework for Connected Healthcare</div>
-                    <p style="font-style: italic; color: #64748b;">IEEE Transactions on Consumer Electronics (IF-10.8)</p>
-                </div>
-
-                <div class="timeline-entry reveal">
-                    <span class="timeline-year">2025</span>
-                    <div class="timeline-title" onclick="window.open('https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en')">Q-CoG: Holistic Cognition Framework for Secure Scalable IoT</div>
-                    <p style="font-style: italic; color: #64748b;">Submitted to IEEE Transactions on Emerging Topics in CI</p>
-                </div>
-
-                <div class="timeline-entry reveal">
-                    <span class="timeline-year">2024</span>
-                    <div class="timeline-title" onclick="window.open('https://doi.org/10.1109/ACCESS.2024.3484574')">Plant Leaf Disease Detection using Ensemble Learning</div>
-                    <p style="font-style: italic; color: #64748b;">IEEE Access (IF-3.6)</p>
-                </div>
-
-                <div class="timeline-entry reveal">
-                    <span class="timeline-year">2024</span>
-                    <div class="timeline-title" onclick="window.open('https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en')">Novel NFT Solution for Assets Digitization in Cyber-Physical Systems</div>
-                    <p style="font-style: italic; color: #64748b;">IEEE Open Journal of Computer Society</p>
-                </div>
-
-                <div class="timeline-entry reveal">
-                    <span class="timeline-year">2024</span>
-                    <div class="timeline-title" onclick="window.open('https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en')">Exploring Convergence of Metaverse, Blockchain, and AI</div>
-                    <p style="font-style: italic; color: #64748b;">WIRE Data Mining and Knowledge Discovery</p>
-                </div>
-
-                <div class="timeline-entry reveal">
-                    <span class="timeline-year">2023</span>
-                    <div class="timeline-title" onclick="window.open('https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en')">Unveiling the Metaverse: Emerging Trends & Perspectives</div>
-                    <p style="font-style: italic; color: #64748b;">IEEE Access</p>
-                </div>
+            <div class="bio-text">
+                <p>I am currently an Associate Professor of Data and Cybersecurity at the <strong>College of Computing and Information Technology, University of Doha for Science & Technology (UDST), Doha, Qatar</strong>. My academic journey is driven by a passion for teaching, innovative research, and community service. I have consistently maintained a high standard of performance, balancing Research (60%), Teaching (30%), and Service (10%).</p>
+                
+                <p>I completed my <strong>Ph.D. in Information Systems</strong> at Universiti Teknologi Malaysia (UTM) in 2013[cite: 22]. My doctoral thesis, titled <em>“Energy Efficient and Low Carbon Enabler Green IT Framework for Data Centers”</em>, proposed a groundbreaking framework for evaluating and deploying energy-efficient cloud data centers. The findings were published in the Tier-1 journal, Renewable & Sustainable Energy Reviews[cite: 22, 23].</p>
+                
+                <p>Throughout my 14-year career, I have held academic positions in Malaysia, UAE, KSA, Pakistan, and Brunei[cite: 25]. My research expertise spans <strong>Cybersecurity, Digital Forensics, Blockchain & Distributed Ledger Technology, and Cloud Computing</strong>. I have authored over <strong>220 peer-reviewed papers</strong>, with more than 180 in Q-ranked journals, achieving a cumulative Impact Factor exceeding 400[cite: 27, 29]. I am also the recipient of multiple research grants and awards, including the "Best Researcher Award" from UDST in 2024[cite: 214].</p>
             </div>
             
-            <div style="text-align: center; margin-top: 3rem;">
-                <a href="https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en" target="_blank" class="btn btn-primary">View All on Google Scholar</a>
+            <a href="https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en" target="_blank" class="btn btn-primary">View Google Scholar</a>
+        </section>
+
+        <div class="news-container">
+            <div class="news-title"><i class="fas fa-bullhorn"></i> Latest Updates</div>
+            <div class="news-item"><span class="news-date">Jan 2026</span><span>Submitted "Agentic AI in Cybersecurity" to ICT Express (IF-4.8)[cite: 395].</span></div>
+            <div class="news-item"><span class="news-date">Jan 2026</span><span>Awarded QRDI Grant as PI for "Q-POPs Environmental Monitoring"[cite: 379].</span></div>
+            <div class="news-item"><span class="news-date">Dec 2025</span><span>Ranked in Stanford Top 2% Scientists (4th consecutive year)[cite: 5].</span></div>
+            <div class="news-item"><span class="news-date">Oct 2025</span><span>Volunteered as Proctor for IEEE Xtreme 19.0 Programming Competition[cite: 216].</span></div>
+        </div>
+
+        <div class="stats-grid" id="stats">
+            <div><span class="stat-num counter" data-target="7870">0</span><span class="stat-label">Citations</span></div>
+            <div><span class="stat-num counter" data-target="45">0</span><span class="stat-label">h-index</span></div>
+            <div><span class="stat-num counter" data-target="220">0</span><span class="stat-label">Publications</span></div>
+            <div><span class="stat-num counter" data-target="14">0</span><span class="stat-label">Years Exp.</span></div>
+        </div>
+
+        <section id="research">
+            <div class="section-header">
+                <h2>Research Grants & Projects</h2>
+                <p style="color:var(--slate);">Leading international projects in Blockchain, AI, and Critical Infrastructure.</p>
             </div>
-        </div>
-    </section>
+            
+            <div class="research-grid">
+                <div class="tilt-card" onmousemove="tilt(event, this)" onmouseleave="resetTilt(this)">
+                    <div class="tilt-shadow"></div>
+                    <div>
+                        <span class="card-tag">QRDI Grant 2025</span>
+                        <h3>Q-POPs Environmental Monitoring</h3>
+                        <p><strong>Principal Investigator.</strong> Developing "Q-CDEC," a private Hyperledger Blockchain platform to securely store environmental data samples for Qatar's persistent organic pollutants [cite: 34-37].</p>
+                    </div>
+                    <span class="card-link">View Project <i class="fas fa-arrow-right"></i></span>
+                </div>
 
-    <section class="section" id="teaching">
-        <div class="section-header reveal">
-            <h2>Teaching & Service</h2>
-            <div class="line"></div>
-        </div>
+                <div class="tilt-card" onmousemove="tilt(event, this)" onmouseleave="resetTilt(this)">
+                    <div class="tilt-shadow"></div>
+                    <div>
+                        <span class="card-tag">Fintech Security</span>
+                        <h3>Blockchain for DeFi</h3>
+                        <p><strong>Principal Investigator (Hail Univ).</strong> Investigating blockchain tokenization and NFTs to establish secure digital identities, mitigating phishing in Decentralized Finance [cite: 42-47].</p>
+                    </div>
+                    <span class="card-link">View Project <i class="fas fa-arrow-right"></i></span>
+                </div>
 
-        <div class="ts-grid reveal">
-            <div>
-                <h3 style="margin-bottom: 1.5rem; color: var(--blue);">Teaching Areas</h3>
-                <div class="teaching-list">
-                    <div class="teach-card"><i class="fas fa-shield-alt"></i> <span>Cybersecurity</span></div>
-                    <div class="teach-card"><i class="fas fa-code"></i> <span>Secure Coding</span></div>
-                    <div class="teach-card"><i class="fas fa-key"></i> <span>Cryptography</span></div>
-                    <div class="teach-card"><i class="fas fa-search"></i> <span>Digital Forensics</span></div>
-                    <div class="teach-card"><i class="fas fa-cubes"></i> <span>Blockchain</span></div>
-                    <div class="teach-card"><i class="fas fa-network-wired"></i> <span>Networks</span></div>
+                <div class="tilt-card" onmousemove="tilt(event, this)" onmouseleave="resetTilt(this)">
+                    <div class="tilt-shadow"></div>
+                    <div>
+                        <span class="card-tag">National Security</span>
+                        <h3>Post-Quantum Cryptography</h3>
+                        <p><strong>Research Grant.</strong> Designing a resilient Post-Quantum Resistant Cryptographic (PQRC) system to protect Critical National Infrastructure (CNI) using a decentralized, private PKI [cite: 48-53].</p>
+                    </div>
+                    <span class="card-link">View Project <i class="fas fa-arrow-right"></i></span>
+                </div>
+
+                <div class="tilt-card" onmousemove="tilt(event, this)" onmouseleave="resetTilt(this)">
+                    <div class="tilt-shadow"></div>
+                    <div>
+                        <span class="card-tag">Smart Cities</span>
+                        <h3>DSCoT Architecture</h3>
+                        <p><strong>PhD Supervision.</strong> Created "Decentralized Smart City of Things" (DSCoT), extending ERC-721 NFTs to authenticate IoT assets in Cyber-Physical Systems [cite: 54-64].</p>
+                    </div>
+                    <span class="card-link">View Project <i class="fas fa-arrow-right"></i></span>
                 </div>
             </div>
+        </section>
 
-            <div>
-                <h3 style="margin-bottom: 1.5rem; color: var(--blue);">Service & Editorial</h3>
-                <div class="edu-card">
-                    <ul style="list-style: none; color: #475569;">
-                        <li style="margin-bottom: 15px;"><i class="fas fa-check-circle" style="color:var(--blue); margin-right:8px;"></i> <strong>Associate Editor:</strong> IEEE Access</li>
-                        <li style="margin-bottom: 15px;"><i class="fas fa-check-circle" style="color:var(--blue); margin-right:8px;"></i> <strong>Associate Editor:</strong> PLOS ONE</li>
-                        <li style="margin-bottom: 15px;"><i class="fas fa-check-circle" style="color:var(--blue); margin-right:8px;"></i> <strong>Associate Editor:</strong> Scientific Reports</li>
-                        <li style="margin-bottom: 15px;"><i class="fas fa-check-circle" style="color:var(--blue); margin-right:8px;"></i> <strong>Senior Member:</strong> IEEE</li>
-                        <li style="margin-bottom: 15px;"><i class="fas fa-check-circle" style="color:var(--blue); margin-right:8px;"></i> <strong>Member:</strong> IEEE P3722 Standards Working Group</li>
+        <section id="publications" style="margin-top: 5rem;">
+            <div class="section-header">
+                <h2>Selected Publications</h2>
+                <p style="color:var(--slate);">Highlighting recent high-impact research (2024-2026).</p>
+            </div>
+            <div class="timeline">
+                <div class="pub-item">
+                    <div class="pub-dot"></div>
+                    <span class="pub-year">2026</span>
+                    <div class="pub-title" onclick="window.open('https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en')">Agentic AI in Cybersecurity: Autonomous Threat Intelligence</div>
+                    <p class="pub-meta">Mueen Uddin et al. | Submitted to ICT Express (IF-4.8) [cite: 395]</p>
+                </div>
+                <div class="pub-item">
+                    <div class="pub-dot"></div>
+                    <span class="pub-year">2026</span>
+                    <div class="pub-title" onclick="window.open('https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en')">TUB-IoT: Quantum Trust-Based Big Data UAV Architecture</div>
+                    <p class="pub-meta">IEEE Open Journal of Communication Society (IF-6.1) [cite: 392]</p>
+                </div>
+                <div class="pub-item">
+                    <div class="pub-dot"></div>
+                    <span class="pub-year">2025</span>
+                    <div class="pub-title" onclick="window.open('https://doi.org/10.1007/s10462-025-11219-5')">Generative AI Revolution in Cyber Security: Review of Threat Intelligence</div>
+                    <p class="pub-meta">Artificial Intelligence Review (IF-10.7) [cite: 407]</p>
+                </div>
+                <div class="pub-item">
+                    <div class="pub-dot"></div>
+                    <span class="pub-year">2025</span>
+                    <div class="pub-title" onclick="window.open('https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en')">SEIMR: Secure Ethical IoT Mixed Reality Framework</div>
+                    <p class="pub-meta">IEEE Transactions on Consumer Electronics (IF-10.9) [cite: 402]</p>
+                </div>
+                <div class="pub-item">
+                    <div class="pub-dot"></div>
+                    <span class="pub-year">2025</span>
+                    <div class="pub-title" onclick="window.open('https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en')">DASHES–Autonomous Framework for Connected Healthcare</div>
+                    <p class="pub-meta">IEEE Transactions on Consumer Electronics (IF-10.8) [cite: 405]</p>
+                </div>
+                <div class="pub-item">
+                    <div class="pub-dot"></div>
+                    <span class="pub-year">2024</span>
+                    <div class="pub-title" onclick="window.open('https://doi.org/10.1109/ACCESS.2024.3484574')">Plant Leaf Disease Detection using Ensemble Learning</div>
+                    <p class="pub-meta">IEEE Access (IF-3.6) [cite: 469]</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="teaching" style="margin-top: 5rem;">
+            <div class="section-header">
+                <h2>Teaching Philosophy & Courses</h2>
+            </div>
+            
+            <div style="background:white; padding:2rem; border-left:4px solid var(--blue); margin-bottom:2rem; color:#64748b; font-style:italic;">
+                "An effective learning environment requires <strong>Challenge, Respect, and Enjoyment</strong>. I advocate case-based teaching to illustrate complex theoretical aspects and use real-world projects to engage students." [cite: 756, 770]
+            </div>
+
+            <div class="grid-2">
+                <div class="info-box">
+                    <h3 style="margin-bottom:1.5rem;">Core Courses</h3>
+                    <ul class="teach-list">
+                        <li><i class="fas fa-shield-alt"></i> Introduction to Data & Cybersecurity [cite: 786]</li>
+                        <li><i class="fas fa-code"></i> Secure Software Development [cite: 787]</li>
+                        <li><i class="fas fa-network-wired"></i> Computer Networks [cite: 797]</li>
+                        <li><i class="fas fa-search"></i> Digital Forensics & Investigations [cite: 792]</li>
+                        <li><i class="fas fa-database"></i> Database Management Systems [cite: 800]</li>
+                    </ul>
+                </div>
+                <div class="info-box">
+                    <h3 style="margin-bottom:1.5rem;">Advanced & Elective</h3>
+                    <ul class="teach-list">
+                        <li><i class="fas fa-key"></i> Applied Cryptography [cite: 789]</li>
+                        <li><i class="fas fa-cubes"></i> Blockchain Technologies [cite: 793]</li>
+                        <li><i class="fas fa-user-secret"></i> Privacy in the Digital Era [cite: 790]</li>
+                        <li><i class="fas fa-cloud"></i> Cloud Infrastructure & Services [cite: 808]</li>
+                        <li><i class="fas fa-file-contract"></i> Cybersecurity Policies & Strategies [cite: 788]</li>
                     </ul>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <footer id="contact">
-        <div class="footer-grid">
-            <div>
-                <h4>Dr. Mueen Uddin</h4>
-                <p style="opacity: 0.7; margin-bottom: 1rem;">University of Doha for Science & Technology.<br>Doha, Qatar.</p>
-                <div class="footer-socials">
-                    <a href="mailto:Mueen.uddin@udst.edu.qa"><i class="fas fa-envelope"></i></a>
-                    <a href="https://www.linkedin.com/in/mueen-uddin-bbba4b16/"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://scholar.google.com/citations?user=ULNFqZIAAAAJ&hl=en"><i class="fas fa-graduation-cap"></i></a>
+        <section id="service" style="margin-top: 5rem;">
+            <div class="section-header">
+                <h2>Professional Service</h2>
+                <p style="color:var(--slate);">Actively contributing to the academic community through editorial and leadership roles.</p>
+            </div>
+
+            <div class="grid-2">
+                <div class="info-box">
+                    <h3 style="margin-bottom:1.5rem;">Editorial Roles</h3>
+                    <ul class="teach-list">
+                        <li><i class="fas fa-pen-fancy"></i> <strong>Associate Editor:</strong> IEEE Access (2022-Present) [cite: 324]</li>
+                        <li><i class="fas fa-pen-fancy"></i> <strong>Academic Editor:</strong> PLOS ONE (2022-Present) [cite: 323]</li>
+                        <li><i class="fas fa-pen-fancy"></i> <strong>Associate Editor:</strong> Scientific Reports (2024-Present) [cite: 322]</li>
+                        <li><i class="fas fa-pen-fancy"></i> <strong>Associate Editor:</strong> Frontiers in Comms & Networks [cite: 330]</li>
+                    </ul>
+                </div>
+                <div class="info-box">
+                    <h3 style="margin-bottom:1.5rem;">Memberships & Committees</h3>
+                    <ul class="teach-list">
+                        <li><i class="fas fa-users"></i> <strong>Senior Member:</strong> IEEE (2021-Present) [cite: 250]</li>
+                        <li><i class="fas fa-users"></i> <strong>Member:</strong> IEEE P3722 Standards Working Group [cite: 215]</li>
+                        <li><i class="fas fa-users"></i> <strong>Member:</strong> IEEE Computer Society (Blockchain TC) [cite: 255]</li>
+                        <li><i class="fas fa-users"></i> <strong>TPC Member:</strong> IEEE ICC, Globecom, VTC [cite: 341-362]</li>
+                    </ul>
                 </div>
             </div>
-            
-            <div>
-                <h4>Contact Info</h4>
-                <p style="opacity: 0.7;">Mueen.malik@ieee.org</p>
-                <p style="opacity: 0.7;">(+974) 66025403</p>
+        </section>
+
+        <footer>
+            <div style="margin-bottom: 1rem;">
+                <a href="#about" style="color:white; margin:0 10px;">Biography</a> | 
+                <a href="#research" style="color:white; margin:0 10px;">Research</a> | 
+                <a href="#publications" style="color:white; margin:0 10px;">Publications</a>
             </div>
-            
-            <div>
-                <h4>Menu</h4>
-                <a href="#about" class="footer-link">About</a>
-                <a href="#research" class="footer-link">Research</a>
-                <a href="#publications" class="footer-link">Publications</a>
-            </div>
-        </div>
-        <p style="text-align: center; margin-top: 3rem; opacity: 0.4; font-size: 0.8rem;">&copy; 2026 Dr. Mueen Uddin. All rights reserved.</p>
-    </footer>
+            <div>&copy; 2026 Dr. Mueen Uddin. All rights reserved.</div>
+            <div style="font-size:0.8rem; opacity:0.6; margin-top:0.5rem;">University of Doha for Science & Technology, Qatar</div>
+        </footer>
+
+    </main>
 
     <script>
-        // 1. Mobile Menu
-        function toggleMenu() {
-            document.getElementById('navLinks').classList.toggle('active');
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
         }
 
-        // 2. 3D Tilt Effect
         function tilt(e, card) {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
@@ -586,59 +482,52 @@
             const rotateY = ((x - centerX) / centerX) * 5;
             card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
         }
-
         function resetTilt(card) {
             card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
         }
 
-        // 3. Scroll Animation
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
+                if(entry.isIntersecting) entry.target.classList.add('visible');
             });
         }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        document.querySelectorAll('.pub-item').forEach(el => observer.observe(el));
 
-        // 4. Number Counter Animation
-        const statsObserver = new IntersectionObserver((entries, observer) => {
+        const statsObserver = new IntersectionObserver((entries, obs) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
+                if(entry.isIntersecting) {
                     const counters = entry.target.querySelectorAll('.counter');
                     counters.forEach(counter => {
                         const target = +counter.getAttribute('data-target');
-                        const speed = 200; // The lower the slower
-                        const increment = target / speed;
-                        
-                        const updateCount = () => {
-                            const count = +counter.innerText.replace('+', '');
-                            if (count < target) {
-                                counter.innerText = Math.ceil(count + increment) + (target > 100 ? "+" : "");
-                                setTimeout(updateCount, 20);
-                            } else {
-                                counter.innerText = target + "+";
-                            }
+                        const speed = 100;
+                        const inc = target / speed;
+                        const update = () => {
+                            const c = +counter.innerText.replace('+','');
+                            if(c < target) {
+                                counter.innerText = Math.ceil(c + inc) + (target > 100 ? "+":"");
+                                setTimeout(update, 20);
+                            } else counter.innerText = target + "+";
                         };
-                        updateCount();
+                        update();
                     });
-                    observer.unobserve(entry.target);
+                    obs.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.5 });
-        
-        const statsSection = document.querySelector('#stats');
+        const statsSection = document.getElementById('stats');
         if(statsSection) statsObserver.observe(statsSection);
 
-        // 5. Dynamic Mobile CSS
         const style = document.createElement('style');
         style.innerHTML = `
-            @media (max-width: 768px) {
-                .nav-links.active {
-                    display: flex; position: absolute; top: 80px; left: 0; width: 100%;
-                    background: white; flex-direction: column; padding: 2rem;
-                    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-                }
+            @media (max-width: 1024px) {
+                .sidebar { transform: translateX(-100%); transition: 0.3s; }
+                .sidebar.active { transform: translateX(0); box-shadow: 10px 0 50px rgba(0,0,0,0.1); }
+                .main-wrapper { margin-left: 0; padding: 3rem 2rem; }
+                .top-nav { left: 0; justify-content: center; display:none;}
+                .menu-toggle { display: block; }
+                .research-grid { grid-template-columns: 1fr; }
+                .grid-2 { grid-template-columns: 1fr; }
+                .stats-grid { grid-template-columns: 1fr 1fr; }
             }
         `;
         document.head.appendChild(style);
